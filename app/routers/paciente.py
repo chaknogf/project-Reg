@@ -1,21 +1,20 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from fastapi import APIRouter, HTTPException
 from typing import Optional
 from enum import Enum
 from datetime import date, datetime
 from database import database
 import mysql.connector
+from .enums import GeneroEnum
 
 
 router = APIRouter()
 
+
 db = database.get_database_connection()
 cursor = db.cursor()
 
-class Genero(str, Enum):
-    Masculino = 'M'
-    Femenino = 'F'
-    
+
 
 
 class Paciente(BaseModel):
@@ -25,21 +24,22 @@ class Paciente(BaseModel):
     apellido: str
     dpi: int | None = None
     pasaporte: str | None = None
-    sexo: Genero
+    sexo: GeneroEnum
     nacimiento: date | None = None
-    nacionalidad: int | None = None
+    nacionalidad: int = 1
     lugar_nacimiento: int | None = None
-    estado_civil: int | None = None
-    educacion: int | None = None
-    pueblo: int | None = None
-    idioma: int = '1'
+    estado_civil: int
+    educacion: int
+    pueblo: int
+    idioma: int
     ocupacion: str | None = None
     direccion: str | None = None
     telefono: int | None = None
-    email: str | None = None
+    email: EmailStr | None = None
     padre: str | None = None
     madre: str | None = None
     responsable: str | None = None
+    parentesco: int
     dpi_responsable: int | None = None
     telefono_responsable: int | None = None
     user: str = "admin"
@@ -70,7 +70,7 @@ async def obtener_paciente_id(id: int):
 async def crear_paciente(Pacient: Paciente ):
     try:
         cursor = db.cursor()
-        query = "INSERT INTO pacientes ( expediente, nombre, apellido, dpi, pasaporte, sexo, nacimiento, nacionalidad, lugar_nacimiento, estado_civil, educacion, pueblo, idioma, ocupacion, direccion, telefono, email, padre, madre, responsable, dpi_responsable, telefono_responsable, user) VALUES ( %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        query = "INSERT INTO pacientes ( expediente, nombre, apellido, dpi, pasaporte, sexo, nacimiento, nacionalidad, lugar_nacimiento, estado_civil, educacion, pueblo, idioma, ocupacion, direccion, telefono, email, padre, madre, responsable, parentesco, dpi_responsable, telefono_responsable, user) VALUES ( %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
         values = (
             Pacient.expediente,
             Pacient.nombre,
@@ -92,6 +92,7 @@ async def crear_paciente(Pacient: Paciente ):
             Pacient.padre,
             Pacient.madre,
             Pacient.responsable,
+            Pacient.parentesco,
             Pacient.dpi_responsable,
             Pacient.telefono_responsable,
             Pacient.user
@@ -113,7 +114,7 @@ async def actualizar_paciente( Pacient: Paciente, exp: int):
     try:
         #buscar_paciente(exp)
         cursor = db.cursor()
-        query = "UPDATE pacientes SET nombre = %s, apellido = %s, dpi = %s, pasaporte = %s, sexo = %s, nacimiento = %s, nacionalidad = %s, lugar_nacimiento = %s, estado_civil = %s, educacion = %s, pueblo = %s, idioma = %s, ocupacion = %s, direccion = %s, telefono = %s, email = %s, padre = %s, madre = %s,responsable = %s, dpi_responsable = %s, telefono_responsable = %s, user = %s"
+        query = "UPDATE pacientes SET nombre = %s, apellido = %s, dpi = %s, pasaporte = %s, sexo = %s, nacimiento = %s, nacionalidad = %s, lugar_nacimiento = %s, estado_civil = %s, educacion = %s, pueblo = %s, idioma = %s, ocupacion = %s, direccion = %s, telefono = %s, email = %s, padre = %s, madre = %s,responsable = %s, parentesco = %s, dpi_responsable = %s, telefono_responsable = %s, user = %s"
         values = (
             Pacient.nombre,
             Pacient.apellido,
@@ -134,6 +135,7 @@ async def actualizar_paciente( Pacient: Paciente, exp: int):
             Pacient.padre,
             Pacient.madre,
             Pacient.responsable,
+            Pacient.parentesco,
             Pacient.dpi_responsable,
             Pacient.telefono_responsable,
             Pacient.user
