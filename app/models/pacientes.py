@@ -30,6 +30,7 @@ Tpacientes = ('''
   `padre` varchar(50) DEFAULT NULL,
   `madre` varchar(50) DEFAULT NULL,
   `responsable` varchar(50) DEFAULT NULL,
+  `parentesco` int DEFAULT NULL,
   `dpi_responsable` int DEFAULT NULL,
   `telefono_responsable` int DEFAULT NULL,
   `user` varchar(50) DEFAULT NULL,

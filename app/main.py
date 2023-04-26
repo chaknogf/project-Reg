@@ -9,7 +9,7 @@ from models import pacientes, emergencias
 app = FastAPI()
 
 
-@app.get('/crearTablas')
+@app.get('/crearTablas', tags=["SQL"])
 def crear_tablas():
     p = pacientes.crear_tabla()
     e = emergencias.crear_tabla()
