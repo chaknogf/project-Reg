@@ -15,11 +15,31 @@ db = database.get_database_connection()
 cursor = db.cursor()
 
 
+def ultimo_exp():
+    try:
+        
+        cursor = db.cursor()
+        cursor.execute("SELECT MAX(expediente) FROM pacientes")
+        exp = cursor.fetchone()[0]
+        if exp == None:
+            exp = 0
+            return exp
+        else:
+            return exp
+    except mysql.connector.Error as error:
+        return {"message": f"error de correlativo: {error}"}
+    finally:
+        if db.is_connected():
+            #cursor.close()
+            print(f"Ultimo expediente generado no. {exp}")
+            
+            
+cont: int = (ultimo_exp()+1)
 
 
 class Paciente(BaseModel):
     #id: int
-    expediente: int 
+    expediente: int = cont
     nombre: str
     apellido: str
     dpi: int | None = None
@@ -51,6 +71,7 @@ class Paciente(BaseModel):
 async def retornar_pacientes():
     cursor.execute("SELECT * FROM pacientes")
     pacientes = cursor.fetchall()
+    ultimo_exp()
     print(f"** datetime: {now} CONSULTA - GET **")
     return {"pacientes": pacientes}
     
@@ -70,6 +91,7 @@ async def obtener_paciente_id(id: int):
 async def crear_paciente(Pacient: Paciente ):
     try:
         cursor = db.cursor()
+        
         query = "INSERT INTO pacientes ( expediente, nombre, apellido, dpi, pasaporte, sexo, nacimiento, nacionalidad, lugar_nacimiento, estado_civil, educacion, pueblo, idioma, ocupacion, direccion, telefono, email, padre, madre, responsable, parentesco, dpi_responsable, telefono_responsable, user) VALUES ( %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
         values = (
             Pacient.expediente,
@@ -97,6 +119,8 @@ async def crear_paciente(Pacient: Paciente ):
             Pacient.telefono_responsable,
             Pacient.user
         )
+        
+       
         cursor.execute(query, values)
         db.commit()
         return {"message": "Se ha creado paciente con exito"}
@@ -215,3 +239,4 @@ def buscar_id(id: int):
 
 
 now = datetime.now()
+

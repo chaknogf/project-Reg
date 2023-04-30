@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from routers import paciente, emergencia
+from routers import paciente, emergencia, consulta
 #from fastapi.staticfiles import StaticFiles
-from models import pacientes, emergencias
+from models import pacientes, emergencias, consultas
 
 
 
@@ -13,12 +13,14 @@ app = FastAPI()
 def crear_tablas():
     p = pacientes.crear_tabla()
     e = emergencias.crear_tabla()
-    return {f"{p} {e}"}
+    c = consultas.crear_tabla()
+    return {f"{p} {e} {c}"}
 
 #importacion de routers
 
 app.include_router(paciente.router)
 app.include_router(emergencia.router)
+app.include_router(consulta.router)
 '''
 app.include_router(usuarios.router)
 
