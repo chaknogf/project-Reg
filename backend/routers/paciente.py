@@ -111,154 +111,93 @@ async def crear_paciente(Pacient: Paciente ):
          return {"message": f"error al crear paciente: {error}"}
         
         
-'''
-        
-        cursor = db.cursor()
-        
-        query = "INSERT INTO pacientes ( expediente, nombre, apellido, dpi, pasaporte, sexo, nacimiento, nacionalidad, lugar_nacimiento, estado_civil, educacion, pueblo, idioma, ocupacion, direccion, telefono, email, padre, madre, responsable, parentesco, dpi_responsable, telefono_responsable, user) VALUES ( %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-        values = (
-            Pacient.expediente,
-            Pacient.nombre,
-            Pacient.apellido,
-            Pacient.dpi,
-            Pacient.pasaporte,
-            Pacient.sexo,
-            Pacient.nacimiento,
-            Pacient.nacionalidad,
-            Pacient.lugar_nacimiento,
-            Pacient.estado_civil,
-            Pacient.educacion,
-            Pacient.pueblo,
-            Pacient.idioma,
-            Pacient.ocupacion,
-            Pacient.direccion,
-            Pacient.telefono,
-            Pacient.email,
-            Pacient.padre,
-            Pacient.madre,
-            Pacient.responsable,
-            Pacient.parentesco,
-            Pacient.dpi_responsable,
-            Pacient.telefono_responsable,
-            Pacient.user
-        )
-        
-       
-        cursor.execute(query, values)
-        db.commit()
-        return {"message": "Se ha creado paciente con exito"}
-    except mysql.connector.Error as error:
-        return {"message": f"error al crear paciente: {error}"}
-    finally:
-        if db.is_connected():
-            cursor.close()
-            print(f"-- Expediente: {Pacient.expediente} datetime: {now} CREADO --")
-'''
+
 
 #Put conectado a SQL
 @router.put("/paciente/", tags=["Pacientes"])
 async def actualizar_paciente( Pacient: Paciente, exp: int):
     try:
-        #buscar_paciente(exp)
-        cursor = db.cursor()
-        query = "UPDATE pacientes SET nombre = %s, apellido = %s, dpi = %s, pasaporte = %s, sexo = %s, nacimiento = %s, nacionalidad = %s, lugar_nacimiento = %s, estado_civil = %s, educacion = %s, pueblo = %s, idioma = %s, ocupacion = %s, direccion = %s, telefono = %s, email = %s, padre = %s, madre = %s,responsable = %s, parentesco = %s, dpi_responsable = %s, telefono_responsable = %s, user = %s"
-        values = (
-            Pacient.nombre,
-            Pacient.apellido,
-            Pacient.dpi,
-            Pacient.pasaporte,
-            Pacient.sexo,
-            Pacient.nacimiento,
-            Pacient.nacionalidad,
-            Pacient.lugar_nacimiento,
-            Pacient.estado_civil,
-            Pacient.educacion,
-            Pacient.pueblo,
-            Pacient.idioma,
-            Pacient.ocupacion,
-            Pacient.direccion,
-            Pacient.telefono,
-            Pacient.email,
-            Pacient.padre,
-            Pacient.madre,
-            Pacient.responsable,
-            Pacient.parentesco,
-            Pacient.dpi_responsable,
-            Pacient.telefono_responsable,
-            Pacient.user
-        )
-        cursor.execute(query, values)
-        if cursor.rowcount == 0:
-            HTTPException(status_code=404, detail="No existen registros{exp}")
-        db.commit()
-        return {"expediente": exp, **Pacient.dict(), "message": "Actualizado Corecctamente"}
-    except mysql.connector.Error as error:
+        Db = Session()
+        result = Db.query(PacienteModel).filter(PacienteModel.expediente == exp).first()
+        if not result:
+            return JSONResponse(status_code=404, content={"message": "No encontrado"})
+        #result.expediente = Pacient.expediente
+        result.nombre = Pacient.nombre
+        result.apellido = Pacient.apellido
+        result.dpi = Pacient.dpi
+        result.pasaporte = Pacient.pasaporte
+        result.sexo = Pacient.sexo
+        result.nacimiento = Pacient.nacimiento
+        result.nacionalidad = Pacient.nacionalidad
+        result.lugar_nacimiento = Pacient.lugar_nacimiento
+        result.estado_civil = Pacient.estado_civil
+        result.educacion = Pacient.educacion
+        result.pueblo = Pacient.pueblo
+        result.idioma = Pacient.idioma
+        result.ocupacion = Pacient.ocupacion
+        result.direccion = Pacient.direccion
+        result.telefono = Pacient.telefono
+        result.email = Pacient.email
+        result.padre = Pacient.padre
+        result.madre = Pacient.madre
+        result.responsable = Pacient.responsable
+        result.parentesco = Pacient.parentesco
+        result.dpi_responsable = Pacient.dpi_responsable
+        result.telefono_responsable = Pacient.telefono_responsable
+        result.user = Pacient.user
+        
+      
+        Db.commit()
+        return JSONResponse(status_code=201, content={"message": "Actualización Realizada"})
+    except SQLAlchemyError as error:
         return {"message": f"Error al consultar paciente: {error}"}
-    finally:
-        if db.is_connected():
-            cursor.close()
+    finally: 
             print(f"expediente: {exp} datetime: {now} ACTUALIZADO")
 
 #Delete conectado a SQL
 @router.delete("/paciente/{exp}", tags=["Pacientes"])
 async def eliminar_paciente(exp: int):
     try:
-        cursor = db.cursor()
-        path = "DELETE FROM  pacientes WHERE expediente = %s"
-        value = [exp]
-        cursor.execute(path, value)
-        db.commit()
-        if cursor.rowcount == 0:
-            HTTPException(status_code=404, detail="No existen datos que eliminar {exp}")
-        else:
-            return {"message": "paciente eliminado correctamente"}
-    except mysql.connector.Error as error:
-        return {"message": f"Error al eliminar paciente: {error}"}
+        Db = Session()
+        result = Db.query(PacienteModel).filter(PacienteModel.expediente == exp).first()
+        if not result:
+            return JSONResponse(status_code=404, content={"message": "No encontrado"})
+        Db.delete(result)
+        Db.commit()
+        return JSONResponse(status_code=200, content={"message": "Eliminado con exito"})
+    except SQLAlchemyError as error:
+        return {"message": f"Error al consultar paciente: {error}"}
     finally:
-        if db.is_connected():
-            cursor.close()
             print(f"Expediente: {exp} datetime:{now} ELIMINADO realizado")
 
 
 
 def buscar_paciente(expe: int):
     try:
-        cursor = db.cursor()
-        value = [expe]
-        path = "SELECT * FROM pacientes WHERE expediente = %s"
-        cursor.execute(path, value)
-        paciente = cursor.fetchone()
-        if paciente == None:
-            raise HTTPException(status_code=404, detail="No existe registro")
-        else:
-            return {"paciente": paciente}
-    except mysql.connector.Error as error:
+        Db = Session()
+        result = Db.query(PacienteModel).filter(PacienteModel.expediente == expe).first()
+        if not result:
+            return JSONResponse(status_code=404, content={"message": "No encontrado"})
+        return JSONResponse(status_code=200, content=jsonable_encoder(result))
+    except SQLAlchemyError as error:
         return {"message": f"Error al consultar paciente: {error}"}
     finally:
-        if db.is_connected():
-            cursor.close()
-            print(f"Expediente: {expe} datetime:{now} CONSULTADO")
+        print(f"Expediente: {expe} datetime:{now} CONSULTADO")
    
    
    
 def buscar_id(id: int):
     try:
-        cursor = db.cursor()
-        value = [id]
-        path = "SELECT * FROM pacientes WHERE id = %s"
-        cursor.execute(path, value)
-        paciente = cursor.fetchone()
-        if paciente == None:
-            raise HTTPException(status_code=404, detail="No existe registro")
-        else:
-            return {"paciente": paciente}
-    except mysql.connector.Error as error:
+        Db = Session()
+        result = Db.query(PacienteModel).filter(PacienteModel.id == id).first()
+        if not result:
+            return JSONResponse(status_code=404, content={"message": "No encontrado"})
+        return JSONResponse(status_code=200, content=jsonable_encoder(result))
+    except SQLAlchemyError as error:
         return {"message": f"Error al consultar paciente: {error}"}
     finally:
-        if db.is_connected():
-            cursor.close()
-            print(f"id: {id} datetime: {now} CONSULTADO")
-
+        print(f"id: {id} datetime:{now} CONSULTADO")
+           
 
 
 now = datetime.now()
