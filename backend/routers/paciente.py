@@ -1,11 +1,14 @@
 from pydantic import BaseModel, EmailStr
 from fastapi import APIRouter, HTTPException
-from typing import Optional
-from enum import Enum
+from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
+from sqlalchemy.exc import SQLAlchemyError
 from datetime import date, datetime
 from database import database
 import mysql.connector
 from .enums import GeneroEnum
+from database.database import engine, Session, Base
+from models.pacientes import PacienteModel
 
 
 router = APIRouter()
@@ -45,7 +48,7 @@ class Paciente(BaseModel):
     dpi: int | None = None
     pasaporte: str | None = None
     sexo: GeneroEnum
-    nacimiento: date | None = None
+    nacimiento: datetime
     nacionalidad: int = 1
     lugar_nacimiento: int | None = None
     estado_civil: int
@@ -65,16 +68,25 @@ class Paciente(BaseModel):
     user: str = "admin"
     
 
+    
+#Db.metadata.create_all(bind=engine)
+
 
 #Get conectado a SQL
 @router.get("/pacientes", tags=["Pacientes"])
 async def retornar_pacientes():
-    cursor.execute("SELECT * FROM pacientes")
-    pacientes = cursor.fetchall()
-    ultimo_exp()
-    print(f"** datetime: {now} CONSULTA - GET **")
-    return {"pacientes": pacientes}
+    try:
+        ultimo_exp()
+    # cursor.execute("SELECT * FROM pacientes")
+        #paciente = cursor.fetchall()
+        Db = Session()
+        result = Db.query(PacienteModel).all()
+        print(f"** datetime: {now} CONSULTA - GET **")
+        return JSONResponse(status_code=200, content=jsonable_encoder(result))
+    except SQLAlchemyError as error:
+        return {"message": f"error al consultar paciente: {error}"}
     
+        
 
 #Get conectado a SQL
 @router.get("/paciente/{exp}", tags=["Pacientes"])
@@ -90,6 +102,17 @@ async def obtener_paciente_id(id: int):
 @router.post("/paciente/{exp}", tags=["Pacientes"])
 async def crear_paciente(Pacient: Paciente ):
     try:
+        Db = Session()
+        nuevo_paciente = PacienteModel(**Pacient.dict())
+        Db.add(nuevo_paciente)
+        Db.commit()  
+        return JSONResponse(status_code=201, content={"message": "Se ha registrado el paciente"})
+    except SQLAlchemyError as error:
+         return {"message": f"error al crear paciente: {error}"}
+        
+        
+'''
+        
         cursor = db.cursor()
         
         query = "INSERT INTO pacientes ( expediente, nombre, apellido, dpi, pasaporte, sexo, nacimiento, nacionalidad, lugar_nacimiento, estado_civil, educacion, pueblo, idioma, ocupacion, direccion, telefono, email, padre, madre, responsable, parentesco, dpi_responsable, telefono_responsable, user) VALUES ( %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
@@ -130,7 +153,7 @@ async def crear_paciente(Pacient: Paciente ):
         if db.is_connected():
             cursor.close()
             print(f"-- Expediente: {Pacient.expediente} datetime: {now} CREADO --")
-
+'''
 
 #Put conectado a SQL
 @router.put("/paciente/", tags=["Pacientes"])

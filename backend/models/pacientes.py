@@ -1,7 +1,9 @@
 from database import database
 import mysql.connector
 from datetime import datetime
-
+from database import database
+from database.database import Base
+from sqlalchemy import Column, Integer, String, Date
 
 db = database.get_database_connection()
 
@@ -56,4 +58,33 @@ def crear_tabla():
             cursor.close
             print(f"Tabla pacientes datetime:{now} CREADA")
     
+
+# Definición del modelo de datos
+class PacienteModel(Base):
+    __tablename__ = "pacientes"
     
+    id = Column(Integer, primary_key=True) 
+    expediente = Column(Integer)
+    nombre = Column(String(50))
+    apellido = Column(String(50))
+    dpi = Column(Integer)
+    pasaporte = Column(String(50))
+    sexo = Column(String(2))
+    nacimiento = Column(Date)
+    nacionalidad = Column(Integer)
+    lugar_nacimiento = Column(Integer)
+    estado_civil = Column(Integer)
+    educacion = Column(Integer)
+    pueblo= Column(Integer)
+    idioma = Column(String(10))
+    ocupacion = Column(String(50))
+    direccion = Column(String(100))
+    telefono = Column(Integer)
+    email = Column(String(100))
+    padre = Column(String(50))
+    madre = Column(String(50))
+    responsable = Column(String(50))
+    parentesco = Column(Integer)
+    dpi_responsable = Column(Integer)
+    telefono_responsable = Column(Integer)
+    user = Column(String(50))

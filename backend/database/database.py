@@ -1,4 +1,7 @@
 import mysql.connector
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
 MYSQL_HOST = "localhost"
 MYSQL_USER = "root"
@@ -14,3 +17,13 @@ def get_database_connection():
     )
 
     return db
+
+# Configuración de la conexión a la base de datos
+SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:Magnific0@localhost/test_api"
+engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True)
+Session = sessionmaker( bind=engine)
+
+# Declaración de la base de datos
+Base = declarative_base()
+
+#Base.metada.create_all(bind=engine)

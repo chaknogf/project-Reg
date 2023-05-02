@@ -2,11 +2,22 @@ from fastapi import FastAPI
 from routers import paciente, emergencia, consulta
 #from fastapi.staticfiles import StaticFiles
 from models import pacientes, emergencias, consultas
-
-
-
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+origenes_permitidos = [
+    "http://localhost",
+    "http://localhost:4200",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origenes_permitidos,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get('/crearTablas', tags=["SQL"])

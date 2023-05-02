@@ -1,0 +1,26 @@
+<table >
+  <thead>
+    <tr>
+      <th>Expediente</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <!-- <th>Fecha de nacimiento</th> -->
+      <th>DPI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of patient">
+      <td>{{ p.expediente}}</td>
+      <td>{{ p.nombre }}</td>
+      <td>{{ p.apellido }}</td>
+      <!-- <td>{{ paciente.fecha_nacimiento }}</td> -->
+      <td>{{ p.dpi }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li *ngFor="let p of patient">
+    {{p.nombre}}
+  </li>
+</ul>
