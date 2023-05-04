@@ -1,6 +1,6 @@
-import { ServicesService } from './../services.service';
+import { ServicesService } from './../../services.service';
 import { Component, OnInit } from '@angular/core';
-import { Ipacientes } from '../models/Ipaciente';
+import { Ipacientes } from 'src/app/models/Ipaciente';
 
 @Component({
   selector: 'pacientes',
