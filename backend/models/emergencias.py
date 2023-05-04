@@ -1,6 +1,9 @@
 from database import database
 import mysql.connector
 from datetime import datetime
+from database import database
+from database.database import Base
+from sqlalchemy import Column, Integer, String, Date, Time
 
 
 db = database.get_database_connection()
@@ -46,4 +49,21 @@ def crear_tabla():
             cursor.close
             print(f"Tabla emergencias datetime:{now} CREADA")
     
+class EmergenciaModel(Base):
+    __tablename__ = "emergencias"
     
+    id = Column(Integer, primary_key=True)
+    hoja = Column(String(10))
+    fecha = Column(Date)
+    hora = Column(Time)
+    nombre = Column(String(50))
+    apellido = Column(String(50))
+    fecha_nacimiento = Column(Date)
+    sexo = Column(String(2))
+    telefono = Column(Integer)
+    dpi = Column(Integer)
+    direccion = Column(String(100))
+    acompañante = Column(String(50))
+    parentesco = Column(String)
+    comentario = Column(String(100))
+    user = Column(String(50))

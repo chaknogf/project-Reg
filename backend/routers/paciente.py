@@ -77,14 +77,14 @@ class Paciente(BaseModel):
 async def retornar_pacientes():
     try:
         ultimo_exp()
-    # cursor.execute("SELECT * FROM pacientes")
-        #paciente = cursor.fetchall()
         Db = Session()
         result = Db.query(PacienteModel).all()
         print(f"** datetime: {now} CONSULTA - GET **")
         return JSONResponse(status_code=200, content=jsonable_encoder(result))
     except SQLAlchemyError as error:
         return {"message": f"error al consultar paciente: {error}"}
+    finally:
+        print(f"CONSULTADO datetime: {now} ")
     
         
 

@@ -6,7 +6,7 @@ from database.database import Base
 from sqlalchemy import Column, Integer, String, Date
 
 db = database.get_database_connection()
-
+ 
 now = datetime.now()
 
 Tpacientes = ('''
