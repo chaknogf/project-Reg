@@ -3,8 +3,11 @@ from routers import paciente, emergencia, consulta
 #from fastapi.staticfiles import StaticFiles
 from models import pacientes, emergencias, consultas
 from fastapi.middleware.cors import CORSMiddleware
+from middlewares.error_hendler import ErrorHandler
+from middlewares.jwt_bearer import JWTBearer
 
 app = FastAPI()
+app.add_middleware(ErrorHandler)
 
 origenes_permitidos = [
     "http://localhost",
