@@ -1,22 +1,37 @@
-<table >
-  <thead>
+<h2>PACIENTES</h2>
+
+<button type="button" class="btn btn-outline-primary" [routerLink]="['']">Crear</button>
+
+
+<table class='table table-responsive-xxl' aria-labelledby="tableLabel" *ngIf="pacientes">
+
+  <thead >
     <tr>
+      <th></th>
+      <th></th>
       <th>Expediente</th>
       <th>Nombre</th>
       <th>Apellido</th>
-      <!-- <th>Fecha de nacimiento</th> -->
       <th>DPI</th>
+
     </tr>
   </thead>
-  <tbody>
-    <tr *ngFor="let p of patient">
+  <tbody >
+    <tr *ngFor="let p of pacientes">
+
+      <button class="btn btn-outline-secondary" [routerLink]="['']" >editar</button>
+
+      <button class="btn btn-outline-danger" >
+        Borrar
+      </button>
+      <td></td>
       <td>{{ p.expediente}}</td>
       <td>{{ p.nombre }}</td>
       <td>{{ p.apellido }}</td>
-      <!-- <td>{{ paciente.fecha_nacimiento }}</td> -->
       <td>{{ p.dpi }}</td>
+
+
     </tr>
   </tbody>
+
 </table>
-
-

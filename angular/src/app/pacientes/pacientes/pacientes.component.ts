@@ -1,22 +1,25 @@
-import { ServicesService } from './../../services.service';
 import { Component, OnInit } from '@angular/core';
-import { Ipacientes } from 'src/app/models/Ipaciente';
-
+import { PacientesService } from 'src/app/services/pacientes.service';
+import { Ipaciente } from 'src/app/models/ipaciente';
 @Component({
   selector: 'pacientes',
   templateUrl: './pacientes.component.html',
   styleUrls: ['./pacientes.component.css']
 })
-export class PacientesComponent {
+export class PacientesComponent{
+  public pacientes: Ipaciente[] = [];
 
-  public patient: Ipacientes[] = [];
+  constructor(private pacientesService: PacientesService) { }
 
-  constructor(private ServicesService: ServicesService) { }
-
-  ngOnInit() {
-    this.ServicesService.getPacientes().subscribe((data) => {
-      this.patient = data;
-    });
-
+  ngOnInit(){
+    this.pacientesService.getPacientes().subscribe(data => {
+      this.pacientes = data;
+    })
   }
+
+
+
+
+
 }
+

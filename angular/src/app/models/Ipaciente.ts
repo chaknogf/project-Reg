@@ -1,18 +1,18 @@
-export interface Ipacientes{
+export interface Ipaciente {
   id: number;
-  expediente: number
+  expediente: number;
   nombre: string;
   apellido: string;
   dpi: number;
   pasaporte: string;
   sexo: string;
-  nacimiento: string;
+  nacimiento: Date;
   nacionalidad: number;
   lugar_nacimiento: number;
   estado_civil: number;
   educacion: number;
   pueblo: number;
-  idioma: number;
+  idioma: string;
   ocupacion: string;
   direccion: string;
   telefono: number;
@@ -24,5 +24,4 @@ export interface Ipacientes{
   dpi_responsable: number;
   telefono_responsable: number;
   user: string;
-
 }
