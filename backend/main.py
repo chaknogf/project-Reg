@@ -2,8 +2,11 @@ from fastapi import FastAPI
 from routers import paciente, emergencia, consulta
 from models import pacientes, emergencias, consultas
 from fastapi.middleware.cors import CORSMiddleware
+from middlewares.error_hendler import ErrorHandler
+from middlewares.jwt_bearer import JWTBearer
 
 app = FastAPI()
+app.add_middleware(ErrorHandler)
 
 #al configurar los cors verificar colocar las comas y su syntaxis
 origins = [
