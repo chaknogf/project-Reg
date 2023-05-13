@@ -17,7 +17,12 @@ export class PacientesComponent{
     })
   }
 
-
+  delete(exp: number) {
+    this.pacientesService.deletePaciente(exp).subscribe(data => {
+      this.pacientes = data;
+      this.ngOnInit();
+    });
+  }
 
 
 

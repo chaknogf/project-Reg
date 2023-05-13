@@ -14,7 +14,9 @@ import { PacienteCrudComponent } from './pacientes/paciente-crud/paciente-crud.c
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'pacientes', component: PacientesComponent}
+  { path: 'pacientes', component: PacientesComponent },
+  { path: 'paciente-crud', component: PacienteCrudComponent },
+  { path: 'paciente/edit/:id', component: PacienteCrudComponent}
 ]
 
 @NgModule({
@@ -32,7 +34,9 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'pacientes', component: PacientesComponent}
+      { path: 'pacientes', component: PacientesComponent },
+      { path: 'paciente-crud', component: PacienteCrudComponent },
+      { path: 'paciente/edit/:id', component: PacienteCrudComponent}
     ])
   ],
   providers: [],

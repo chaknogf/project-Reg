@@ -1,6 +1,6 @@
 <h2>PACIENTES</h2>
 
-<button type="button" class="btn btn-outline-primary" [routerLink]="['']">Crear</button>
+<button type="button" class="btn btn-outline-primary" [routerLink]="['/paciente-crud']">Crear</button>
 
 
 <table class='table table-responsive-xxl' aria-labelledby="tableLabel" *ngIf="pacientes">
@@ -19,7 +19,7 @@
   <tbody >
     <tr *ngFor="let p of pacientes">
 
-      <button class="btn btn-outline-secondary" [routerLink]="['']" >editar</button>
+      <button class="btn btn-outline-secondary" [routerLink]="['/paciente/edit', p.expediente]" >editar</button>
 
       <button class="btn btn-outline-danger" >
         Borrar
