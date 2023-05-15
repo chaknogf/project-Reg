@@ -2,6 +2,7 @@ import { PacientesService } from './../../services/pacientes.service';
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Ipaciente } from 'src/app/models/ipaciente';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -11,9 +12,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class PacienteCrudComponent implements OnInit {
 
+
+
+
+
+
   @HostBinding('class') clases = 'row';
 
-  pacientte: Ipaciente = {
+  p: Ipaciente = {
     id: 0,
     expediente: 0,
     nombre: "",
@@ -43,14 +49,17 @@ export class PacienteCrudComponent implements OnInit {
 
   edit: boolean = false;
 
-  constructor(public PacientesService: PacientesService, private router: Router, private activateRoute: ActivatedRoute) { }
+
+  constructor(public PacientesService: PacientesService, private router: Router, private activateRoute: ActivatedRoute, private formBuilder: FormBuilder) {
+
+  }
   ngOnInit() {
     const params = this.activateRoute.snapshot.params;
     if (params['expediente']) {
       this.PacientesService.getPaciente(params['expediente'])
         .subscribe(
           data => {
-            this.pacientte = data;
+            this.p = data;
             this.edit = true;
           },
           error => console.log(error)
@@ -59,17 +68,16 @@ export class PacienteCrudComponent implements OnInit {
   }
 
   crearPaciente() {
-    this.PacientesService.crearPaciente(this.pacientte)
-      .subscribe(data => {
-        this.pacientte = data;
+    this.PacientesService.crearPaciente(this.p).subscribe(data => {
+        this.p = data;
         this.router.navigate(['/pacientes']);
-    })
+      })
   }
 
   editar() {
-    this.PacientesService.editPaciente(this.pacientte.expediente, this.pacientte)
+    this.PacientesService.editPaciente(this.p.expediente, this.p)
       .subscribe(data => {
-        this.pacientte = data;
+        this.p = data;
         this.router.navigate(['/pacientes']);
       })
   }
@@ -79,4 +87,29 @@ export class PacienteCrudComponent implements OnInit {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+

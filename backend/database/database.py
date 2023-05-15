@@ -20,7 +20,7 @@ def get_database_connection():
 
 # Configuración de la conexión a la base de datos
 SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:Magnific0@localhost/test_api"
-engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=False)
+engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True)
 Session = sessionmaker( bind=engine)
 
 # Declaración de la base de datos

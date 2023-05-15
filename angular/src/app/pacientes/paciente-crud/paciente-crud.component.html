@@ -1,1 +1,204 @@
-<h1>paciente-crud works!</h1>
+
+<button type="button" class="btn btn-outline-secondary" [routerLink]="['/pacientes']">Regresar</button>
+
+<form >
+  <div class="form-row">
+
+    <div class="form-group col-md-6">
+      <label>Expediente</label>
+      <input type="number" id="expediente" class="form-control" [(ngModel)]="p.expediente" name="expediente" placeholder="expediente" autofocus>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Nombre</label>
+      <input type="text" class="form-control" [(ngModel)]="p.nombre" name="nombre" placeholder="Nombre" autofocus>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Apellido</label>
+      <input type="text"  class="form-control" [(ngModel)]="p.apellido" name="apellido" placeholder="Apellido" autofocus>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>DPI</label>
+      <input type="number" id="dpi" name="dpi" class="form-control" [(ngModel)]="p.dpi" name="dpi" placeholder="dpi" autofocus>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Pasaporte</label>
+      <input type="text" id="pasaporte" name="pasaporte" class="form-control" [(ngModel)]="p.pasaporte" name="pasaporte" placeholder="pasaporte" autofocus>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Sexo</label>
+      <select id="sexo" class="form-control" [(ngModel)]="p.sexo"autofocus>
+        <option value="M">Masculino</option>
+        <option value="F">Femenino</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Fecha de Nacimiento</label>
+      <input type="date" id="nacimiento" name="nacieminto" class="form-control" [(ngModel)]="p.nacimiento" name="nacimiento" placeholder="nacimiento" autofocus>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Nacionalidad</label>
+      <select id="nacionaldad" class="form-control" [(ngModel)]="p.nacionalidad"autofocus>
+        <option value="1">Guatemalteca</option>
+        <option value="2">Beliceña</option>
+        <option value="3">Salvadoreña</option>
+        <option value="4">Honduña</option>
+        <option value="5">Nicaragüense</option>
+        <option value="6">Costarricense</option>
+        <option value="7">Panamaña</option>
+        <option value="8">Méxicana</option>
+        <option value="9">otra</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Lugar de Nacimiento</label>
+      <select id="lugarNacimiento" class="form-control" [(ngModel)]="p.lugar_nacimiento"autofocus>
+        <option value="0401">Chimaltenango, Chimaltenango</option>
+        <option value="0402">San Jose Poaquil, Chimaltenango</option>
+        <option value="0403">San Martin Jilotepeque, Chimaltenango</option>
+        <option value="0404">San Juan Comalapa, Chimaltenango</option>
+        <option value="0405">Santa Apolonia, Chimaltenango</option>
+        <option value="0406">Tecpán Guatemala, Chimaltenango</option>
+        <option value="0407">Patzún, Chimaltenango</option>
+        <option value="0408">San Miguel Pochuta, Chimaltenango</option>
+        <option value="0409">Patzicia, Chimaltenango</option>
+        <option value="0410">Santa Cruz balanyá, Chimaltenango</option>
+        <option value="0411">Acatenango, Chimaltenango</option>
+        <option value="0412">San Pedro Yepocapa, Chimaltenango</option>
+        <option value="0413">San Andrés Itzapa, Chimaltenango</option>
+        <option value="0414">Parramos, Chimaltenango</option>
+        <option value="0415">Zaragoza, Chimaltenango</option>
+        <option value="0416">El Tejar, Chimaltenango</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Estado Civil</label>
+      <select id="estadoCivil" class="form-control" [(ngModel)]="p.estado_civil"autofocus>
+        <option value="0"></option>
+        <option value="1">Casado</option>
+        <option value="2">Unido</option>
+        <option value="3">Soltero</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Educación</label>
+      <select id="educacion" class="form-control" [(ngModel)]="p.educacion"autofocus>
+        <option value="1">No aplica</option>
+        <option value="2">Pre primaria</option>
+        <option value="3">Primaria</option>
+        <option value="4">Básicos</option>
+        <option value="5">Diversificado</option>
+        <option value="6">Universidad</option>
+        <option value="7">Ninguno</option>
+        <option value="8">Otro</option>
+        <option value="9">No indica</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Pueblo</label>
+      <select id="pueblo" class="form-control" [(ngModel)]="p.pueblo"autofocus>
+        <option value="1">Ladino</option>
+        <option value="2">Maya</option>
+        <option value="3">Garífuna</option>
+        <option value="4">Xinca</option>
+        <option value="5">Otros</option>
+        <option value="6">No indica</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Idioma</label>
+      <select id="idioma" class="form-control" [(ngModel)]="p.idioma"autofocus>
+        <option value="24">español</option>
+        <option value="10">kaqchikel</option>
+        <option value="11">kiche</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Ocupación</label>
+      <input type="text" id="ocupacion" name="ocupacion" class="form-control" [(ngModel)]="p.ocupacion" name="ocupacion" placeholder="ocupacion" autofocus>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Dirección de Domicilio</label>
+      <input type="text" id="direccion" name="direccion" class="form-control" [(ngModel)]="p.direccion" name="direccion" placeholder="direccion" autofocus>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Telefono</label>
+      <input type="tel" id="telefono" name="telefono" class="form-control" [(ngModel)]="p.telefono" name="telefono" placeholder="telefono" autofocus>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Email</label>
+      <input type="email" id="email" name="email" class="form-control" [(ngModel)]="p.email" name="email" placeholder="email" autofocus>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Padre</label>
+      <input type="text" id="padre" name="padre" class="form-control" [(ngModel)]="p.padre" name="padre" placeholder="padre" autofocus>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Madre</label>
+      <input type="text" id="madre" name="madre" class="form-control" [(ngModel)]="p.madre" name="madre" placeholder="madre" autofocus>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Responsable</label>
+      <input type="text" id="responsable" name="responsable" class="form-control" [(ngModel)]="p.responsable" name="responsable" placeholder="responsable" autofocus>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Parentesco</label>
+      <select id="parentesco" class="form-control" [(ngModel)]="p.parentesco"autofocus>
+        <option value="0"></option>
+        <option value="1">madre/padre</option>
+        <option value="2">hermano/hermana</option>
+        <option value="3">hijo/hija</option>
+        <option value="2">tio/tia</option>
+        <option value="2">abuelo/abuela</option>
+        <option value="2">primo/prima</option>
+        <option value="2">sobrino/sobrina</option>
+        <option value="2">suegro/suegra</option>
+        <option value="2">yerno/nuera</option>
+        <option value="2">tutor</option>
+        <option value="2">amistad/conocido</option>
+        <option value="2">otro</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>DPI Responsable</label>
+      <input type="number" id="dpiResponsable" name="dpiResponsable" class="form-control" [(ngModel)]="p.dpi_responsable" name="dpiResponsable" placeholder="dpiResponsable" autofocus>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Telefono Responsable</label>
+      <input type="number" id="telResponsable" name="telResponsable" class="form-control" [(ngModel)]="p.telefono_responsable" name="telResponsable" placeholder="telefono Responsable" autofocus>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Usuario</label>
+      <input type="text" id="user" name="responsable" class="form-control" [(ngModel)]="p.user" name="user" placeholder="user" autofocus>
+    </div>
+
+
+
+  </div>
+
+  <div class="form-group col-md-6">
+    <button type="submit" class="btn btn-success" (click)="edit ? editar(): crearPaciente()" >Guardar</button>
+  </div>
+</form>
