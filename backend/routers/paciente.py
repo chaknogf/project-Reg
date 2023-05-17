@@ -48,7 +48,7 @@ class Paciente(BaseModel):
     dpi: int | None = None
     pasaporte: str | None = None
     sexo: GeneroEnum
-    nacimiento: datetime
+    nacimiento: date
     nacionalidad: int = 1
     lugar_nacimiento: int | None = None
     estado_civil: int

@@ -31,7 +31,7 @@
 
     <div class="form-group col-md-6">
       <label>Sexo</label>
-      <select id="sexo" class="form-control" [(ngModel)]="p.sexo"autofocus>
+      <select id="sexo" class="form-control" [(ngModel)]="p.sexo" name="sexo" autofocus>
         <option value="M">Masculino</option>
         <option value="F">Femenino</option>
       </select>
@@ -44,7 +44,7 @@
 
     <div class="form-group col-md-6">
       <label>Nacionalidad</label>
-      <select id="nacionaldad" class="form-control" [(ngModel)]="p.nacionalidad"autofocus>
+      <select id="nacionaldad" class="form-control" [(ngModel)]="p.nacionalidad" name="nacionalidad" autofocus>
         <option value="1">Guatemalteca</option>
         <option value="2">Beliceña</option>
         <option value="3">Salvadoreña</option>
@@ -59,7 +59,7 @@
 
     <div class="form-group col-md-6">
       <label>Lugar de Nacimiento</label>
-      <select id="lugarNacimiento" class="form-control" [(ngModel)]="p.lugar_nacimiento"autofocus>
+      <select id="lugarNacimiento" class="form-control" [(ngModel)]="p.lugar_nacimiento" name="lugarNacimiento" autofocus>
         <option value="0401">Chimaltenango, Chimaltenango</option>
         <option value="0402">San Jose Poaquil, Chimaltenango</option>
         <option value="0403">San Martin Jilotepeque, Chimaltenango</option>
@@ -81,7 +81,7 @@
 
     <div class="form-group col-md-6">
       <label>Estado Civil</label>
-      <select id="estadoCivil" class="form-control" [(ngModel)]="p.estado_civil"autofocus>
+      <select id="estadoCivil" class="form-control" [(ngModel)]="p.estado_civil" name="estadoCivil" autofocus>
         <option value="0"></option>
         <option value="1">Casado</option>
         <option value="2">Unido</option>
@@ -91,7 +91,7 @@
 
     <div class="form-group col-md-6">
       <label>Educación</label>
-      <select id="educacion" class="form-control" [(ngModel)]="p.educacion"autofocus>
+      <select id="educacion" class="form-control" [(ngModel)]="p.educacion" name="educacion" autofocus>
         <option value="1">No aplica</option>
         <option value="2">Pre primaria</option>
         <option value="3">Primaria</option>
@@ -106,7 +106,7 @@
 
     <div class="form-group col-md-6">
       <label>Pueblo</label>
-      <select id="pueblo" class="form-control" [(ngModel)]="p.pueblo"autofocus>
+      <select id="pueblo" class="form-control" [(ngModel)]="p.pueblo" name="pueblo" autofocus>
         <option value="1">Ladino</option>
         <option value="2">Maya</option>
         <option value="3">Garífuna</option>
@@ -118,7 +118,7 @@
 
     <div class="form-group col-md-6">
       <label>Idioma</label>
-      <select id="idioma" class="form-control" [(ngModel)]="p.idioma"autofocus>
+      <select id="idioma" class="form-control" [(ngModel)]="p.idioma" name="idioma" autofocus>
         <option value="24">español</option>
         <option value="10">kaqchikel</option>
         <option value="11">kiche</option>
@@ -137,7 +137,7 @@
 
     <div class="form-group col-md-6">
       <label>Telefono</label>
-      <input type="tel" id="telefono" name="telefono" class="form-control" [(ngModel)]="p.telefono" name="telefono" placeholder="telefono" autofocus>
+      <input type="number" id="telefono" name="telefono" class="form-control" [(ngModel)]="p.telefono" name="telefono" placeholder="telefono" autofocus>
     </div>
 
     <div class="form-group col-md-6">
@@ -162,7 +162,7 @@
 
     <div class="form-group col-md-6">
       <label>Parentesco</label>
-      <select id="parentesco" class="form-control" [(ngModel)]="p.parentesco"autofocus>
+      <select id="parentesco" class="form-control" [(ngModel)]="p.parentesco" name="parentesco" autofocus>
         <option value="0"></option>
         <option value="1">madre/padre</option>
         <option value="2">hermano/hermana</option>
@@ -199,6 +199,7 @@
   </div>
 
   <div class="form-group col-md-6">
-    <button type="submit" class="btn btn-success" (click)="edit ? editar(): crearPaciente()" >Guardar</button>
+    <button type="submit" class="btn btn-success" (click)="crearPaciente()">CREAR</button>
+    <!-- <button type="submit" class="btn btn-success" (click)="edit ? editar(): crearPaciente()" >Guardar</button> -->
   </div>
 </form>
