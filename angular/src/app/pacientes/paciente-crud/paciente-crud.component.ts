@@ -4,18 +4,12 @@ import { Ipaciente } from 'src/app/models/ipaciente';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
-
 @Component({
   selector: 'paciente-crud',
   templateUrl: './paciente-crud.component.html',
   styleUrls: ['./paciente-crud.component.css']
 })
 export class PacienteCrudComponent implements OnInit {
-
-
-
-
-
 
   @HostBinding('class') clases = 'row';
 
@@ -67,13 +61,13 @@ export class PacienteCrudComponent implements OnInit {
     }
   }
 
-  crearPaciente() {
+
+crearPaciente() {
     this.PacientesService.crearPaciente(this.p).subscribe(data => {
         this.p = data;
         this.router.navigate(['/pacientes']);
       })
   }
-
   editar() {
     this.PacientesService.editPaciente(this.p.expediente, this.p)
       .subscribe(data => {
