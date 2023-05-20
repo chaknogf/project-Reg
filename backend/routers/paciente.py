@@ -43,18 +43,18 @@ cont: int = (ultimo_exp()+1)
 class Paciente(BaseModel):
     #id: int
     expediente: int = cont
-    nombre: str
-    apellido: str
+    nombre: str | None = None
+    apellido: str| None = None
     dpi: int | None = None
     pasaporte: str | None = None
-    sexo: GeneroEnum
-    nacimiento: date
+    sexo: GeneroEnum | None = None
+    nacimiento: date | None = None
     nacionalidad: int = 1
     lugar_nacimiento: int | None = None
-    estado_civil: int
-    educacion: int
-    pueblo: int
-    idioma: int
+    estado_civil: int | None = None
+    educacion: int | None = None
+    pueblo: int | None = None
+    idioma: str | None = None
     ocupacion: str | None = None
     direccion: str | None = None
     telefono: int | None = None
@@ -62,10 +62,10 @@ class Paciente(BaseModel):
     padre: str | None = None
     madre: str | None = None
     responsable: str | None = None
-    parentesco: int
+    parentesco: int | None = None
     dpi_responsable: int | None = None
     telefono_responsable: int | None = None
-    user: str = "admin"
+    user: str | None = None
     
 
     
@@ -99,7 +99,7 @@ async def obtener_paciente_id(id: int):
     return buscar_id(id)
 
 #Post conectado a SQL
-@router.post("/paciente/{exp}", tags=["Pacientes"])
+@router.post("/paciente/", tags=["Pacientes"])
 async def crear_paciente(Pacient: Paciente ):
     try:
         Db = Session()

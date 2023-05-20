@@ -119,9 +119,9 @@
     <div class="form-group col-md-6">
       <label>Idioma</label>
       <select id="idioma" class="form-control" [(ngModel)]="p.idioma" name="idioma" autofocus>
-        <option value="24">español</option>
-        <option value="10">kaqchikel</option>
-        <option value="11">kiche</option>
+        <option value="Español">español</option>
+        <option value="Kaqchikel">kaqchikel</option>
+        <option value="Kiche">kiche</option>
       </select>
     </div>
 
@@ -199,7 +199,7 @@
   </div>
 
   <div class="form-group col-md-6">
-    <button type="submit" class="btn btn-success" (click)="crearPaciente()">CREAR</button>
-    <!-- <button type="submit" class="btn btn-success" (click)="edit ? editar(): crearPaciente()" >Guardar</button> -->
+
+    <button type="submit" class="btn btn-success" (click)="edit ? editar(): crearPaciente()" >Guardar</button>
   </div>
 </form>

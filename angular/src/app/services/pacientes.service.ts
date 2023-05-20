@@ -15,11 +15,11 @@ export class PacientesService {
   }
 
   getPaciente(exp: number): Observable<any>{
-    return this.http.get(this.urlapi + "/pacientes/" + exp);
+    return this.http.get(this.urlapi + "/paciente/" + exp);
   }
 
   crearPaciente(paciente: Ipaciente): Observable<any>{
-    return this.http.post(this.urlapi + "/paciente", paciente);
+    return this.http.post(this.urlapi + "/paciente/", paciente);
   }
 
   editPaciente(exp: number, updateP: Ipaciente): Observable<any>{
