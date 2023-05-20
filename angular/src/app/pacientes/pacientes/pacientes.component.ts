@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PacientesService } from 'src/app/services/pacientes.service';
 import { Ipaciente } from 'src/app/models/ipaciente';
+
+
 @Component({
   selector: 'pacientes',
   templateUrl: './pacientes.component.html',
@@ -24,7 +26,31 @@ export class PacientesComponent{
     });
   }
 
+  calcularEdad(Nacimiento: Date) {
+    const hoy = new Date();
+    const fechaNac = new Date(Nacimiento);
+    let años = hoy.getFullYear() - fechaNac.getFullYear();
+    let meses = hoy.getMonth() - fechaNac.getMonth();
+    let dias = hoy.getDate() - fechaNac.getDate();
+    if (meses < 0 || (meses === 0 && dias < 0)) {
+      años--;
+      meses += 12;
+      if (dias < 0) {
+        meses--;
+        dias += new Date(hoy.getFullYear(), hoy.getMonth(), 0).getDate();
+      }
+    } else if (dias < 0) {
+      meses--;
+      dias += new Date(hoy.getFullYear(), hoy.getMonth(), 0).getDate();
+    }
+
+    return `${años}a ${meses}m ${dias}d`;
+  }
+
 
 
 }
+
+
+
 
