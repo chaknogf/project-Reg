@@ -33,9 +33,24 @@ export class PacientesComponent{
   }
 
 
+  order: string = 'asc';
 
 
-  calcularEdad(Nacimiento: Date) {
+  sortTable(colu: string) {
+    if (this.order === 'asc') {
+      this.pacientes.sort((a, b) => a[colu] > b[colu] ? 1 : -1);
+      this.order = 'desc';
+    } else {
+      this.pacientes.sort((a, b) => a[colu] < b[colu] ? 1 : -1);
+      this.order = 'asc';
+    }
+  }
+
+
+
+
+
+  calcularEdad(Nacimiento: Date): string {
     const hoy = new Date();
     const fechaNac = new Date(Nacimiento);
     let años = hoy.getFullYear() - fechaNac.getFullYear();

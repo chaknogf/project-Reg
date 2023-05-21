@@ -1,4 +1,5 @@
 export interface Ipaciente {
+  [key: string]: string | number | boolean | Date;
   id: number;
   expediente: number;
   nombre: string;

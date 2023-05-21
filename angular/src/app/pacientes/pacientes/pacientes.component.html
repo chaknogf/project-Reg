@@ -1,4 +1,9 @@
 <h2>PACIENTES</h2>
+<form onsubmit="getPaciente()">
+  <label for="busqueda">Buscar paciente:</label>
+  <input type="text" id="busqueda" name="busqueda">
+  <button type="submit">Buscar</button>
+</form>
 
 <button type="button" class="btn btn-outline-primary" [routerLink]="['/paciente-crud']">Crear</button>
 
@@ -9,14 +14,14 @@
     <tr>
       <th></th>
       <th></th>
-      <th>Expediente</th>
-      <th>Nombre</th>
-      <th>Apellido</th>
-      <th>DPI</th>
-      <th>Fecha Nacimiento</th>
-      <th>Sexo</th>
-      <th>Edad</th>
-      <th>id</th>
+      <th (click)="sortTable('expediente')">EXP</th>
+      <th (click)="sortTable('nombre')">NOMBRE</th>
+      <th (click)="sortTable('apellido')">APELLIDO</th>
+      <th (click)="sortTable('dpi')">DPI</th>
+      <th (click)="sortTable('nacimiento')">FECHA NACIMIENTO</th>
+      <th (click)="sortTable('sexo')">SEXO</th>
+      <th (click)="sortTable('edad')">EDAD</th>
+      <th (click)="sortTable('id')">ID</th>
 
     </tr>
   </thead>
