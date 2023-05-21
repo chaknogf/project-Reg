@@ -23,7 +23,7 @@
   <tbody >
     <tr *ngFor="let p of pacientes">
 
-      <button class="btn btn-outline-secondary" [routerLink]="['/paciente/edit', p.expediente]" >editar</button>
+      <button class="btn btn-outline-secondary" [routerLink]="['/paciente/edit', p.expediente]">editar</button>
 
       <button class="btn btn-outline-danger" (click)="delete(p.expediente)" >
         Borrar

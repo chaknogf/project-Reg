@@ -16,7 +16,7 @@ export class PacienteCrudComponent implements OnInit {
 
   p: Ipaciente = {
   id: 0,
-  expediente: 2,
+  expediente: 0,
   nombre: "string",
   apellido: "string",
   dpi: 0,
@@ -50,8 +50,8 @@ export class PacienteCrudComponent implements OnInit {
   }
   ngOnInit() {
     const params = this.activateRoute.snapshot.params;
-    if (params['expediente']) {
-      this.PacientesService.getPaciente(params['expediente'])
+    if (params['id']) {
+      this.PacientesService.getPaciente(params['id'])
         .subscribe(
           data => {
             this.p = data;
@@ -63,7 +63,7 @@ export class PacienteCrudComponent implements OnInit {
   }
 
 
-crearPaciente() {
+crearPaciente(): void {
     this.PacientesService.crearPaciente(this.p).subscribe(data => {
         this.p = data;
         this.router.navigate(['/pacientes']);

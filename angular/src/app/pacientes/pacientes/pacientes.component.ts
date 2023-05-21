@@ -26,6 +26,15 @@ export class PacientesComponent{
     });
   }
 
+  getPaciente(exp: number) {
+    this.pacientesService.getPaciente(exp).subscribe(data => {
+      this.pacientes = data;
+      });
+  }
+
+
+
+
   calcularEdad(Nacimiento: Date) {
     const hoy = new Date();
     const fechaNac = new Date(Nacimiento);

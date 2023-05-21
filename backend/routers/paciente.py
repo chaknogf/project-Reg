@@ -114,7 +114,7 @@ async def crear_paciente(Pacient: Paciente ):
 
 
 #Put conectado a SQL
-@router.put("/paciente/", tags=["Pacientes"])
+@router.put("/paciente/{exp}", tags=["Pacientes"])
 async def actualizar_paciente( Pacient: Paciente, exp: int):
     try:
         Db = Session()
