@@ -1,16 +1,14 @@
 <h2>PACIENTES</h2>
-<form onsubmit="getPaciente()">
-  <label for="busqueda">Buscar paciente:</label>
-  <input type="text" id="busqueda" name="busqueda">
-  <button type="submit">Buscar</button>
-</form>
+
+<div class="search-container">
+  <input type="text" class="form-control-sm"  [(ngModel)]="searchText" placeholder="Buscar # expediente">
+  <button class="btn btn-outline-dark" (click)="searchPaciente()">Buscar</button>
+</div>
 
 <button type="button" class="btn btn-outline-primary" [routerLink]="['/paciente-crud']">Crear</button>
 
-
-<table class='table table-responsive-xxl' aria-labelledby="tableLabel" *ngIf="pacientes">
-
-  <thead >
+<table class='table table-responsive-xxl' aria-labelledby="tableLabel" *ngIf="pacientes.length > 0">
+  <thead>
     <tr>
       <th></th>
       <th></th>
@@ -22,31 +20,24 @@
       <th (click)="sortTable('sexo')">SEXO</th>
       <th (click)="sortTable('edad')">EDAD</th>
       <th (click)="sortTable('id')">ID</th>
-
     </tr>
   </thead>
-  <tbody >
-    <tr *ngFor="let p of pacientes">
-
-      <button class="btn btn-outline-secondary" [routerLink]="['/paciente/edit', p.expediente]">editar</button>
-
-      <button class="btn btn-outline-danger" (click)="delete(p.expediente)" >
-        Borrar
-      </button>
-      <td></td>
-      <td>{{ p.expediente}}</td>
-      <td>{{ p.nombre }}</td>
-      <td>{{ p.apellido }}</td>
-      <td>{{ p.dpi }}</td>
-      <td>{{ p.nacimiento| date:'dd/MM/yyyy'}}</td>
-      <td>{{ p.sexo }}</td>
-      <td> {{ calcularEdad(p.nacimiento)}} </td>
-      <td>{{p.id}}</td>
-
-
+  <tbody>
+    <tr *ngFor="let paciente of filteredPacientes"  >
+      <td>
+        <button class="btn btn-outline-secondary" [routerLink]="['/paciente/edit', paciente.expediente]">editar</button>
+      </td>
+      <td>
+        <button class="btn btn-outline-danger" (click)="delete(paciente.expediente)">Borrar</button>
+      </td>
+      <td>{{ paciente.expediente }}</td>
+      <td>{{ paciente.nombre }}</td>
+      <td>{{ paciente.apellido }}</td>
+      <td>{{ paciente.dpi }}</td>
+      <td>{{ paciente.nacimiento | date:'dd/MM/yyyy' }}</td>
+      <td>{{ paciente.sexo }}</td>
+      <td>{{ calcularEdad(paciente.nacimiento) }}</td>
+      <td>{{ paciente.id }}</td>
     </tr>
   </tbody>
-
 </table>
-
-

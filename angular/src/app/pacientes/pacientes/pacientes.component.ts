@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PacientesService } from 'src/app/services/pacientes.service';
 import { Ipaciente } from 'src/app/models/ipaciente';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,13 +11,22 @@ import { Ipaciente } from 'src/app/models/ipaciente';
 })
 export class PacientesComponent{
   public pacientes: Ipaciente[] = [];
+  public filteredPacientes: Ipaciente[] = [];
+  public searchText: string = '';
 
-  constructor(private pacientesService: PacientesService) { }
 
-  ngOnInit(){
+  constructor(private pacientesService: PacientesService, private router: Router) { }
+  reset: boolean = false;
+
+  ngOnInit() {
+    this.getPacientes();
+  }
+
+  getPacientes() {
     this.pacientesService.getPacientes().subscribe(data => {
       this.pacientes = data;
-    })
+      this.filteredPacientes = data;
+    });
   }
 
   delete(exp: number) {
@@ -26,13 +36,18 @@ export class PacientesComponent{
     });
   }
 
-  getPaciente(exp: number) {
-    this.pacientesService.getPaciente(exp).subscribe(data => {
-      this.pacientes = data;
-      });
+  searchPaciente() {
+    if (this.searchText) {
+      this.filteredPacientes = this.pacientes.filter(paciente =>
+        paciente.expediente.toString().includes(this.searchText)
+      );
+    } else {
+      this.filteredPacientes = this.pacientes;
+    }
   }
 
 
+  busqueda: string = '';
   order: string = 'asc';
 
 
@@ -73,7 +88,17 @@ export class PacientesComponent{
 
 
 
+
+
+
+
 }
+
+
+
+
+
+
 
 
 
