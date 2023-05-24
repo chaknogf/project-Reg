@@ -1,8 +1,11 @@
+import { Observable } from 'rxjs';
 import { PacientesService } from './../../services/pacientes.service';
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Ipaciente } from 'src/app/models/ipaciente';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
+
+
 
 @Component({
   selector: 'paciente-crud',
@@ -49,6 +52,7 @@ export class PacienteCrudComponent implements OnInit {
 
   }
   ngOnInit() {
+    this.NuevoExp()
     const params = this.activateRoute.snapshot.params;
     if (params['id']) {
       this.PacientesService.getPaciente(params['id'])
@@ -77,6 +81,16 @@ crearPaciente(): void {
       })
   }
 
+  public nuevoExp: number = 0;
+  exp = this.NuevoExp()
+
+  NuevoExp() {
+    this.PacientesService.Expediente().subscribe(data => {
+      this.nuevoExp = data;
+      this.p.expediente = this.nuevoExp;
+
+    })
+  }
 
 
 
