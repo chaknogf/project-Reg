@@ -25,7 +25,7 @@ export class PacienteCrudComponent implements OnInit {
   dpi: 0,
   pasaporte: "string",
   sexo: "M",
-  nacimiento:new Date("2023-05-17"),
+  nacimiento:new Date(),
   nacionalidad: 1,
   lugar_nacimiento: 0,
   estado_civil: 0,
