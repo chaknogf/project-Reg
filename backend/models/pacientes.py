@@ -35,7 +35,10 @@ Tpacientes = ('''
   `parentesco` int DEFAULT NULL,
   `dpi_responsable` int DEFAULT NULL,
   `telefono_responsable` int DEFAULT NULL,
+  `estado` varchar(2) DEFAULT NULL,
+  `exp_madre` int DEFAULT NULL,
   `user` varchar(50) DEFAULT NULL,
+  `fechaDefuncion` date DEFAULT NULL, 
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -87,4 +90,7 @@ class PacienteModel(Base):
     parentesco = Column(Integer)
     dpi_responsable = Column(Integer)
     telefono_responsable = Column(Integer)
+    estado = Column(String(2))
+    exp_madre = Column(Integer)
     user = Column(String(50))
+    fechaDefuncion = Column(Date)

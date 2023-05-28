@@ -9,6 +9,10 @@ class GeneroEnum(str, Enum):
     Masculino = 'M'
     Femenino = 'F'
     
+class EstadoEnum(str, Enum):
+    Vivo = 'v'
+    Muerto = 'm'
+    
     
 class PuebloEnum(int, Enum):
     Ladino = 1
