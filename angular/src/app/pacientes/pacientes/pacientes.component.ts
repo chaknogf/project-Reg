@@ -111,7 +111,18 @@ export class PacientesComponent{
 
   totalPaginas(): number {
     return Math.ceil(this.pacientes.length / this.totalRegistros);
+
   }
+
+
+
+
+
+
+
+
+
+
 }
 
 

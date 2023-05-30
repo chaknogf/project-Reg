@@ -27,7 +27,8 @@
   <tbody>
     <tr *ngFor="let paciente of filteredPacientes"  >
       <td>
-        <button type="button" class="btn btn-outline-primary" [routerLink]="['/crearRn']">RN</button>
+       <!-- Dentro del bucle *ngFor -->
+        <!-- <button class="btn btn-outline-secondary" (click)="crearRegistroNuevo(paciente.expediente)">Crear</button> -->
       </td>
       <td>
         <button class="btn btn-outline-secondary" [routerLink]="['/paciente/edit', paciente.expediente]">editar</button>
