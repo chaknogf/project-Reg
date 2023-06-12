@@ -2,11 +2,12 @@ from pydantic import BaseModel, EmailStr
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
+from sqlalchemy import func,select
 from sqlalchemy.exc import SQLAlchemyError
 from datetime import date, datetime
 from database import database
 import mysql.connector
-from .enums import GeneroEnum
+from .enums import GeneroEnum, EstadoEnum
 from database.database import engine, Session, Base
 from models.pacientes import PacienteModel
 
@@ -18,31 +19,28 @@ db = database.get_database_connection()
 cursor = db.cursor()
 
 
-def ultimo_exp():
+ultimo_expediente = 0
+
+def actualizar_ultimo_exp():
     try:
+        Db = Session()
+        max_exp = Db.execute(select(func.max(PacienteModel.expediente))).scalar()
+        New_exp = max_exp + 1
+        Db.close()
+        return New_exp
         
-        cursor = db.cursor()
-        cursor.execute("SELECT MAX(expediente) FROM pacientes")
-        exp = cursor.fetchone()[0]
-        if exp == None:
-            exp = 0
-            return exp
-        else:
-            return exp
-    except mysql.connector.Error as error:
-        return {"message": f"error de correlativo: {error}"}
+    except SQLAlchemyError as error:
+        return {"message": f"error al consultar paciente: {error}"}
     finally:
-        if db.is_connected():
-            #cursor.close()
-            print(f"Ultimo expediente generado no. {exp}")
+        print(f"Ultimo expediente generado no. {max_exp}")
             
             
-cont: int = (ultimo_exp()+1)
+cont: int 
 
 
 class Paciente(BaseModel):
     #id: int
-    expediente: int = cont
+    expediente: int
     nombre: str | None = None
     apellido: str| None = None
     dpi: int | None = None
@@ -65,18 +63,28 @@ class Paciente(BaseModel):
     parentesco: int | None = None
     dpi_responsable: int | None = None
     telefono_responsable: int | None = None
+    estado: EstadoEnum| None = None
+    exp_madre: int | None = None
     user: str | None = None
+    fechaDefuncion: date | None = None
     
+
+        
 
     
 #Db.metadata.create_all(bind=engine)
+
+@router.get("/expediente")
+async def obtener_ultimo_expediente():
+    result = actualizar_ultimo_exp()
+    return result
 
 
 #Get conectado a SQL
 @router.get("/pacientes", tags=["Pacientes"])
 async def retornar_pacientes():
     try:
-        ultimo_exp()
+        #ultimo_expediente()
         Db = Session()
         result = Db.query(PacienteModel).all()
         print(f"** datetime: {now} CONSULTA - GET **")
@@ -106,6 +114,8 @@ async def crear_paciente(Pacient: Paciente ):
         nuevo_paciente = PacienteModel(**Pacient.dict())
         Db.add(nuevo_paciente)
         Db.commit()  
+        actualizar_ultimo_exp()
+        cursor.close()
         return JSONResponse(status_code=201, content={"message": "Se ha registrado el paciente"})
     except SQLAlchemyError as error:
          return {"message": f"error al crear paciente: {error}"}
@@ -144,7 +154,10 @@ async def actualizar_paciente( Pacient: Paciente, exp: int):
         result.parentesco = Pacient.parentesco
         result.dpi_responsable = Pacient.dpi_responsable
         result.telefono_responsable = Pacient.telefono_responsable
+        result.estado = Pacient.estado
+        result.exp_madre = Pacient.exp_madre
         result.user = Pacient.user
+        result.fechaDefuncion = Pacient.fechaDefuncion
         
       
         Db.commit()

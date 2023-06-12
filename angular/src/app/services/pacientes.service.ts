@@ -3,10 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Ipaciente } from '../models/ipaciente';
 
+interface nuevoExpResponse {
+  nuevo_exp: number;
+}
 @Injectable({
   providedIn: 'root'
 })
 export class PacientesService {
+
   private urlapi = "http://localhost:8000";
   constructor(private http: HttpClient) { }
 
@@ -30,7 +34,9 @@ export class PacientesService {
     return this.http.delete(this.urlapi + "/paciente/" + exp);
   }
 
-
+  Expediente(): Observable<any> {
+    return this.http.get(this.urlapi + "/expediente");
+  }
 
 
 
