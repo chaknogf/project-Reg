@@ -24,5 +24,8 @@ export interface Ipaciente {
   parentesco: number;
   dpi_responsable: number;
   telefono_responsable: number;
+  estado: string;
+  exp_madre: number;
   user: string;
+  fechaDefuncion: string;
 }

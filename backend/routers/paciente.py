@@ -7,7 +7,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from datetime import date, datetime
 from database import database
 import mysql.connector
-from .enums import GeneroEnum
+from .enums import GeneroEnum, EstadoEnum
 from database.database import engine, Session, Base
 from models.pacientes import PacienteModel
 
@@ -63,7 +63,10 @@ class Paciente(BaseModel):
     parentesco: int | None = None
     dpi_responsable: int | None = None
     telefono_responsable: int | None = None
+    estado: EstadoEnum| None = None
+    exp_madre: int | None = None
     user: str | None = None
+    fechaDefuncion: date | None = None
     
 
         
@@ -151,7 +154,10 @@ async def actualizar_paciente( Pacient: Paciente, exp: int):
         result.parentesco = Pacient.parentesco
         result.dpi_responsable = Pacient.dpi_responsable
         result.telefono_responsable = Pacient.telefono_responsable
+        result.estado = Pacient.estado
+        result.exp_madre = Pacient.exp_madre
         result.user = Pacient.user
+        result.fechaDefuncion = Pacient.fechaDefuncion
         
       
         Db.commit()
