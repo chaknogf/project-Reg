@@ -27,5 +27,5 @@ export interface Ipaciente {
   estado: string;
   exp_madre: number;
   user: string;
-  fechaDefuncion: string;
+  fechaDefuncion: string | Date;
 }

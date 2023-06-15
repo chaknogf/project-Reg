@@ -66,7 +66,7 @@ class Paciente(BaseModel):
     estado: EstadoEnum| None = None
     exp_madre: int | None = None
     user: str | None = None
-    fechaDefuncion: date | None = None
+    fechaDefuncion: str | None = None
     
 
         

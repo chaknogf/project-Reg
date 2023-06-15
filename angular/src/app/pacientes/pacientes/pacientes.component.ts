@@ -102,10 +102,12 @@ export class PacientesComponent{
     const indiceInicio = (this.paginaActual - 1) * tamanoPagina;
     const indiceFin = indiceInicio + tamanoPagina;
     this.filteredPacientes = this.pacientes.slice(indiceInicio, indiceFin);
+    this.totalRegistros = this.filteredPacientes.length; // Agrega esta línea para actualizar el número total de registros por página
   }
 
+
   getPaginas(): number[] {
-    const totalPaginas = Math.ceil(this.pacientes.length / this.totalRegistros);
+    const totalPaginas = Math.ceil(this.filteredPacientes.length / this.totalRegistros);
     return Array.from({ length: totalPaginas }, (_, index) => index + 1);
   }
 

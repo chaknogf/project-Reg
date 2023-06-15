@@ -14,14 +14,15 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { PacientesComponent } from './pacientes/pacientes/pacientes.component';
 import { PacienteCrudComponent } from './pacientes/paciente-crud/paciente-crud.component';
-import { CrearRnComponent } from './pacientes/crearRn/crearRn.component';
+import { DetallePacienteComponent } from './pacientes/detallePaciente/detallePaciente.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'pacientes', component: PacientesComponent },
   { path: 'paciente-crud', component: PacienteCrudComponent },
   { path: 'paciente/edit/:id', component: PacienteCrudComponent },
-  { path: 'crear-rn', component: CrearRnComponent }
+  { path: 'detalleP/view/:id', component: DetallePacienteComponent},
+
 ]
 
 @NgModule({
@@ -33,7 +34,8 @@ const routes: Routes = [
     PacienteCrudComponent,
     PacientesComponent,
     HomeComponent,
-    CrearRnComponent
+    DetallePacienteComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ const routes: Routes = [
       { path: 'pacientes', component: PacientesComponent },
       { path: 'paciente-crud', component: PacienteCrudComponent },
       { path: 'paciente/edit/:id', component: PacienteCrudComponent },
-      { path: 'crearRn', component: CrearRnComponent}
+      { path: 'detalleP/view/:id', component: DetallePacienteComponent},
+
     ])
   ],
   providers: [],

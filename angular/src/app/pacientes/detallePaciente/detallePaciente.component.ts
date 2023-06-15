@@ -6,11 +6,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'paciente-crud',
-  templateUrl: './paciente-crud.component.html',
-  styleUrls: ['./paciente-crud.component.css']
+  selector: 'detallePaciente',
+  templateUrl: './detallePaciente.component.html',
+  styleUrls: ['./detallePaciente.component.css']
 })
-export class PacienteCrudComponent implements OnInit {
+export class DetallePacienteComponent implements OnInit {
 
   @HostBinding('class') clases = 'row';
 
@@ -47,15 +47,12 @@ export class PacienteCrudComponent implements OnInit {
 
   };
 
-  edit: boolean = false;
-  isDead: boolean = false; // Variable para el estado de fallecido (checkbox)
+  view: boolean = false;
+
 
   constructor(public PacientesService: PacientesService, private router: Router, private activateRoute: ActivatedRoute, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    // Obtener el expediente del paciente
-    this.NuevoExp()
-
 
     // Obtener los parámetros de la ruta
     const params = this.activateRoute.snapshot.params;
@@ -66,18 +63,18 @@ export class PacienteCrudComponent implements OnInit {
         .subscribe(
           data => {
             this.p = data;
-            this.edit = true;
+            this.view = true;
           },
           error => console.log(error)
         )
     }
   }
 
-  crearPaciente(): void {
-    // Crear un nuevo paciente
-    this.PacientesService.crearPaciente(this.p).subscribe(data => {
+  verPaciente(): void {
+    // Obtener Paciente
+    this.PacientesService.getPaciente(this.p.expediente).subscribe(data => {
         this.p = data;
-        this.router.navigate(['/pacientes']);
+
       })
   }
 
@@ -90,42 +87,12 @@ export class PacienteCrudComponent implements OnInit {
       })
   }
 
-  // Variables para el expediente
-  public nuevoExp: number = 0;
-  exp = this.NuevoExp()
-
-  NuevoExp() {
-    // Obtener el expediente del paciente inicialmente
-    this.PacientesService.Expediente().subscribe(data => {
-      if (this.edit == false) {
-        this.nuevoExp = data;
-        this.p.expediente = this.nuevoExp;
-      }
-    });
-
-    // Actualizar el expediente cada 3 segundos
-    interval(3000).subscribe(() => {
-      this.PacientesService.Expediente().subscribe(data => {
-        this.nuevoExp = data;
-        this.p.expediente = this.nuevoExp;
-      });
-    });
-  }
 
 
 
-  cambiarEstado() {
 
-    const confirmacion = confirm('¿Estás seguro de cambiar el estado?');
-    if (confirmacion) {
-      if (this.p.estado === 'm') {
-        this.p.estado = 'v';
-      } else {
-        this.p.estado = 'm';
-        this.p.fechaDefuncion = ""; // Asignar la fecha actual como fecha de defunción
-      }
-    }
-  }
+
+
 
 
 

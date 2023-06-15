@@ -27,9 +27,9 @@
   <tbody>
     <tr *ngFor="let paciente of filteredPacientes"  >
       <td>
-       <!-- Dentro del bucle *ngFor -->
-        <!-- <button class="btn btn-outline-secondary" (click)="crearRegistroNuevo(paciente.expediente)">Crear</button> -->
+        <button class="btn btn-outline-dark" [routerLink]="['/detalleP/view', paciente.expediente]">ver</button>
       </td>
+
       <td>
         <button class="btn btn-outline-secondary" [routerLink]="['/paciente/edit', paciente.expediente]">editar</button>
       </td>
@@ -50,7 +50,7 @@
 </table>
 
  <!-- Paginación -->
- <nav *ngIf="totalPaginas() > 1">
+ <nav *ngIf="totalPaginas()">
   <ul class="pagination justify-content-center">
     <li class="page-item" [class.disabled]="paginaActual === 1">
       <a class="page-link" (click)="onPageChange(1)" aria-label="Primera">

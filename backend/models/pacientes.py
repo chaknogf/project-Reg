@@ -93,4 +93,4 @@ class PacienteModel(Base):
     estado = Column(String(2))
     exp_madre = Column(Integer)
     user = Column(String(50))
-    fechaDefuncion = Column(Date)
+    fechaDefuncion = Column(String)
