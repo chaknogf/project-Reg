@@ -54,7 +54,7 @@ export class PacienteCrudComponent implements OnInit {
 
   ngOnInit() {
     // Obtener el expediente del paciente
-    this.NuevoExp()
+    //this.NuevoExp()
 
 
     // Obtener los parámetros de la ruta
@@ -90,7 +90,7 @@ export class PacienteCrudComponent implements OnInit {
       })
   }
 
-  // Variables para el expediente
+  //Variables para el expediente
   public nuevoExp: number = 0;
   exp = this.NuevoExp()
 
@@ -104,12 +104,12 @@ export class PacienteCrudComponent implements OnInit {
     });
 
     // Actualizar el expediente cada 3 segundos
-    interval(3000).subscribe(() => {
-      this.PacientesService.Expediente().subscribe(data => {
-        this.nuevoExp = data;
-        this.p.expediente = this.nuevoExp;
-      });
-    });
+    // interval(3000).subscribe(() => {
+    //   this.PacientesService.Expediente().subscribe(data => {
+    //     this.nuevoExp = data;
+    //     this.p.expediente = this.nuevoExp;
+    //   });
+    // });
   }
 
 

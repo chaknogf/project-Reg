@@ -1,9 +1,11 @@
+import { PacienteObjeto } from './../pacienteObjet';
 import { interval } from 'rxjs';
 import { PacientesService } from './../../services/pacientes.service';
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Ipaciente } from 'src/app/models/ipaciente';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
+
 
 @Component({
   selector: 'detallePaciente',
@@ -14,7 +16,7 @@ export class DetallePacienteComponent implements OnInit {
 
   @HostBinding('class') clases = 'row';
 
-  // Objeto del paciente
+  // // Objeto del paciente
   p: Ipaciente = {
     id: 0,
     expediente: 0,
@@ -47,10 +49,20 @@ export class DetallePacienteComponent implements OnInit {
 
   };
 
+
+
+
+
+
+
   view: boolean = false;
 
 
   constructor(public PacientesService: PacientesService, private router: Router, private activateRoute: ActivatedRoute, private formBuilder: FormBuilder) {}
+
+
+
+
 
   ngOnInit() {
 
@@ -78,14 +90,28 @@ export class DetallePacienteComponent implements OnInit {
       })
   }
 
-  editar() {
-    // Editar el paciente existente
-    this.PacientesService.editPaciente(this.p.expediente, this.p)
-      .subscribe(data => {
-        this.p = data;
-        this.router.navigate(['/pacientes']);
-      })
+  calcularEdad(Nacimiento: Date): string {
+    const hoy = new Date();
+    const fechaNac = new Date(Nacimiento);
+    let años = hoy.getFullYear() - fechaNac.getFullYear();
+    let meses = hoy.getMonth() - fechaNac.getMonth();
+    let dias = hoy.getDate() - fechaNac.getDate();
+    if (meses < 0 || (meses === 0 && dias < 0)) {
+      años--;
+      meses += 12;
+      if (dias < 0) {
+        meses--;
+        dias += new Date(hoy.getFullYear(), hoy.getMonth(), 0).getDate();
+      }
+    } else if (dias < 0) {
+      meses--;
+      dias += new Date(hoy.getFullYear(), hoy.getMonth(), 0).getDate();
+    }
+
+    return `${años}a ${meses}m ${dias}d`;
   }
+
+
 
 
 

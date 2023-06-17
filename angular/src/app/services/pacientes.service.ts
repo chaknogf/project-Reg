@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Ipaciente } from '../models/ipaciente';
+import { Observable, interval } from 'rxjs';
+import { Ipaciente } from '../models/ipaciente';;
+import { switchMap } from 'rxjs/operators';
+
 
 interface nuevoExpResponse {
   nuevo_exp: number;
@@ -35,7 +37,9 @@ export class PacientesService {
   }
 
   Expediente(): Observable<any> {
-    return this.http.get(this.urlapi + "/expediente");
+    return interval(900).pipe(
+      switchMap(() => this.http.get(this.urlapi + '/expediente'))
+    );
   }
 
 
