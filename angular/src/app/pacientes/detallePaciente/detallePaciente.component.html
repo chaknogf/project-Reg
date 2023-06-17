@@ -1,9 +1,32 @@
 <div class="card" *ngIf="p">
   <div class="card-tittle">
-    <h1>Detalle</h1>
+    <h1>Detalle De Paciente</h1>
   </div>
   <div class="card-body">
     <p>Nombre: {{p.nombre}}</p>
     <p>Apellido: {{p.apellido}}</p>
+    <p>DPI: {{p.dpi}}</p>
+    <p>Pasaporte: {{p.pasaporte}}</p>
+    <p>Fecha de Nacimiento: {{p.nacimiento}}</p>
+    <p>Edad: {{calcularEdad(p.nacimiento)}}</p>
+    <p>Sexo: {{ p.sexo === 'M' ? 'Masculino' : 'Femenino' }}</p>
+
+  </div>
+  <div class="card-body">
+    <p>Nacionalidad: {{p.nacionalidad}}</p>
+    <p>Lugar de Nacimiento: {{p.lugar_nacimiento}}</p>
+    <p>Estado Civil: {{p.estado_civil}}</p>
+    <p>Educación: {{p.educacion}}</p>
+    <p>Pueblo: {{p.pueblo}}</p>
+    <p>Idioma: {{p.idioma}}</p>
+  </div>
+  <div class="card-body">
+    <p>Nacionalidad: {{p.nacionalidad}}</p>
+    <p>Lugar de Nacimiento: {{p.lugar_nacimiento}}</p>
+    <p>Estado Civil: {{p.estado_civil}}</p>
+    <p>Educación: {{p.educacion}}</p>
+    <p>Pueblo: {{p.pueblo}}</p>
+    <p>Idioma: {{p.idioma}}</p>
   </div>
 </div>
+
