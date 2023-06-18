@@ -1,32 +1,67 @@
-<div class="card" *ngIf="p">
+<div class="card row" *ngIf="p">
   <div class="card-tittle">
     <h1>Detalle De Paciente</h1>
   </div>
-  <div class="card-body">
-    <p>Nombre: {{p.nombre}}</p>
-    <p>Apellido: {{p.apellido}}</p>
-    <p>DPI: {{p.dpi}}</p>
-    <p>Pasaporte: {{p.pasaporte}}</p>
-    <p>Fecha de Nacimiento: {{p.nacimiento}}</p>
-    <p>Edad: {{calcularEdad(p.nacimiento)}}</p>
-    <p>Sexo: {{ p.sexo === 'M' ? 'Masculino' : 'Femenino' }}</p>
+  <div class="row">
+    <div class="card col-md-6">
+      <div class="card-body">
+        <h6 class="">Nombre Completo:</h6>
+        <p>{{p.nombre}}  {{p.apellido}}</p>
+        <p class="h6">DPI: </p>
+        <p>{{ p.dpi | numberToText | formatoDPI }}</p>
 
-  </div>
-  <div class="card-body">
-    <p>Nacionalidad: {{p.nacionalidad}}</p>
-    <p>Lugar de Nacimiento: {{p.lugar_nacimiento}}</p>
-    <p>Estado Civil: {{p.estado_civil}}</p>
-    <p>Educación: {{p.educacion}}</p>
-    <p>Pueblo: {{p.pueblo}}</p>
-    <p>Idioma: {{p.idioma}}</p>
-  </div>
-  <div class="card-body">
-    <p>Nacionalidad: {{p.nacionalidad}}</p>
-    <p>Lugar de Nacimiento: {{p.lugar_nacimiento}}</p>
-    <p>Estado Civil: {{p.estado_civil}}</p>
-    <p>Educación: {{p.educacion}}</p>
-    <p>Pueblo: {{p.pueblo}}</p>
-    <p>Idioma: {{p.idioma}}</p>
+        <p>Pasaporte: {{p.pasaporte}}</p>
+        <p>Fecha de Nacimiento: {{p.nacimiento}}</p>
+        <p>Edad: {{calcularEdad(p.nacimiento)}}</p>
+        <p>Sexo: {{ p.sexo === 'M' ? 'Masculino' : 'Femenino' }}</p>
+        <p>Estado: {{p.estado == 'V' ? 'Vivo' : 'Muerto'}}</p>
+      </div>
+    </div>
+    <div class="card col-md-6">
+      <div class="card-body">
+        <p>Nacionalidad: {{p.nacionalidad}}</p>
+        <p>Lugar de Nacimiento: {{p.lugar_nacimiento}}</p>
+        <p>Estado Civil: {{p.estado_civil}}</p>
+        <p>Educación: {{p.educacion}}</p>
+        <p>Pueblo: {{p.pueblo}}</p>
+        <p>Idioma: {{p.idioma}}</p>
+      </div>
+    </div>
+    <div class="card col-md-6">
+      <div class="card-body">
+        <p>Nacionalidad: {{p.nacionalidad}}</p>
+        <p>Lugar de Nacimiento: {{p.lugar_nacimiento}}</p>
+        <p>Estado Civil: {{p.estado_civil}}</p>
+        <p>Educación: {{p.educacion}}</p>
+        <p>Pueblo: {{p.pueblo}}</p>
+        <p>Idioma: {{p.idioma}}</p>
+        <p>Ocupación: {{p.ocupacion}}</p>
+      </div>
+    </div>
+    <div class="card col-md-3">
+      <div class="card-body">
+        <p>Dirección: {{p.direccion}}</p>
+        <p>Teléfono: {{p.telefono}}</p>
+        <p>Email: {{p.email}}</p>
+      </div>
+    </div>
+    <div class="card col-md-3">
+      <div class="card-body">
+        <p>Padre: {{p.padre}}</p>
+        <p>Madre: {{p.madre}}</p>
+        <p>Responsable: {{p.responsable}}</p>
+        <p>Parentesco: {{p.parentesco}}</p>
+        <p>DPI del Responsable: {{p.dpi_responsable}}</p>
+        <p>Telefono de Responsable: {{p.telefono_responsable}}</p>
+      </div>
+    </div>
+    <div class="card col-md-3">
+      <div class="card-body">
+        <p>Usuario: {{p.user}}</p>
+        <p>Creación: </p>
+        <p>Actualización: </p>
+      </div>
+    </div>
   </div>
 </div>
 

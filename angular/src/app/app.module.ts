@@ -4,7 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsModule
-
+import { FormatoDPIPipe } from './pacientes/pipesPacientes/formatoDPI.pipe';
+import { NumberToTextPipe } from './pacientes/pipesPacientes/number-to-text.pipe';
 
 
 
@@ -35,6 +36,9 @@ const routes: Routes = [
     PacientesComponent,
     HomeComponent,
     DetallePacienteComponent,
+    FormatoDPIPipe,
+    NumberToTextPipe,
+
 
   ],
   imports: [
