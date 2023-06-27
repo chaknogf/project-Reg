@@ -1,67 +1,115 @@
-<div class="card row" *ngIf="p">
-  <div class="card-tittle">
-    <h1>Detalle De Paciente</h1>
-  </div>
-  <div class="row">
-    <div class="card col-md-6">
-      <div class="card-body">
-        <h6 class="">Nombre Completo:</h6>
-        <p>{{p.nombre}}  {{p.apellido}}</p>
-        <p class="h6">DPI: </p>
-        <p>{{ p.dpi | numberToText | formatoDPI }}</p>
 
-        <p>Pasaporte: {{p.pasaporte}}</p>
-        <p>Fecha de Nacimiento: {{p.nacimiento}}</p>
-        <p>Edad: {{calcularEdad(p.nacimiento)}}</p>
-        <p>Sexo: {{ p.sexo === 'M' ? 'Masculino' : 'Femenino' }}</p>
-        <p>Estado: {{p.estado == 'V' ? 'Vivo' : 'Muerto'}}</p>
+<div [ngSwitch]="vistaActual">
+  <!-- Vista 1 -->
+  <ng-container *ngSwitchCase="'vista1'" id="vista1">
+    <div class="card row" *ngIf="p">
+      <button (click)="generarPDF()">Generar PDF</button>
+      <div class="card-tittle">
+        <h1>Detalle De Paciente: </h1>
+        <h2 class="col-mt-4 ">Expediente: {{p.expediente}}</h2>
+        <h1 class="text-dark">{{p.nombre}}  {{p.apellido}}</h1>
+
+      </div>
+      <div class="row">
+        <div class="card col-md-6">
+          <div class="card-body">
+            <h6 class="">Nombre Completo:</h6>
+            <p>{{p.nombre}}  {{p.apellido}}</p>
+            <p class="h6">DPI: </p>
+            <p>{{ p.dpi | numberToText | formatoDPI }}</p>
+            <p class="h6">Pasaporte:</p>
+            <p>{{p.pasaporte}}</p>
+            <p class="h6">Fecha de Nacimiento:</p>
+            <p> {{p.nacimiento}}</p>
+            <p class="h6">Edad:</p>
+            <p>{{p.nacimiento | edad}}</p>
+            <p class="h6">Sexo:</p>
+            <p> {{ p.sexo === 'M' ? 'Masculino' : 'Femenino' }}</p>
+            <p class="h6">Estado: </p>
+            <p>{{p.estado == 'v' ? 'Vivo' : 'Muerto'}}</p>
+          </div>
+        </div>
+        <div class="card col-md-6">
+          <div class="card-body">
+            <p class="h6">Nacionalidad:</p>
+            <p> {{p.nation}}</p>
+            <p class="h6">Lugar de Nacimiento:</p>
+            <p>{{p.municipio}}</p>
+            <p class="h6">Estado Civil:</p>
+            <p>{{p.ecivil}}</p>
+            <p class="h6">Educación:</p>
+            <p>{{p.academic}}</p>
+            <p class="h6">Pueblo:</p>
+            <p>{{p.people}}</p>
+            <p class="h6">Idioma:</p>
+            <p>{{p.lenguage}}</p>
+          </div>
+        </div>
+
+        <div class="card col-md-3">
+          <div class="card-body">
+            <p class="h6">Dirección:</p>
+            <p> {{p.direccion}}</p>
+            <p class="h6">Teléfono:</p>
+            <p> {{p.telefono}}</p>
+            <p class="h6">Email:</p>
+            <p> {{p.email}}</p>
+          </div>
+        </div>
+        <div class="card col-md-3">
+          <div class="card-body">
+            <p class="h6">Padre:</p>
+            <p> {{p.padre}}</p>
+            <p class="h6">Madre:</p>
+            <p> {{p.madre}}</p>
+            <p class="h6">Responsable:</p>
+            <p> {{p.responsable}}</p>
+            <p class="h6">Parentesco:</p>
+            <p> {{p.parents}}</p>
+            <p class="h6">DPI del Responsable:</p>
+            <p> {{p.dpi_responsable}}</p>
+            <p class="h6">Telefono de Responsable:</p>
+            <p> {{p.telefono_responsable}}</p>
+          </div>
+        </div>
+        <div class="card col-md-3">
+          <div class="card-body">
+            <p class="h6">Usuario:</p>
+            <p> {{p.user}}</p>
+            <p class="h6">Creación: </p>
+            <p></p>
+            <p class="h6">Actualización: </p>
+            <p></p>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="card col-md-6">
-      <div class="card-body">
-        <p>Nacionalidad: {{p.nacionalidad}}</p>
-        <p>Lugar de Nacimiento: {{p.lugar_nacimiento}}</p>
-        <p>Estado Civil: {{p.estado_civil}}</p>
-        <p>Educación: {{p.educacion}}</p>
-        <p>Pueblo: {{p.pueblo}}</p>
-        <p>Idioma: {{p.idioma}}</p>
-      </div>
-    </div>
-    <div class="card col-md-6">
-      <div class="card-body">
-        <p>Nacionalidad: {{p.nacionalidad}}</p>
-        <p>Lugar de Nacimiento: {{p.lugar_nacimiento}}</p>
-        <p>Estado Civil: {{p.estado_civil}}</p>
-        <p>Educación: {{p.educacion}}</p>
-        <p>Pueblo: {{p.pueblo}}</p>
-        <p>Idioma: {{p.idioma}}</p>
-        <p>Ocupación: {{p.ocupacion}}</p>
-      </div>
-    </div>
-    <div class="card col-md-3">
-      <div class="card-body">
-        <p>Dirección: {{p.direccion}}</p>
-        <p>Teléfono: {{p.telefono}}</p>
-        <p>Email: {{p.email}}</p>
-      </div>
-    </div>
-    <div class="card col-md-3">
-      <div class="card-body">
-        <p>Padre: {{p.padre}}</p>
-        <p>Madre: {{p.madre}}</p>
-        <p>Responsable: {{p.responsable}}</p>
-        <p>Parentesco: {{p.parentesco}}</p>
-        <p>DPI del Responsable: {{p.dpi_responsable}}</p>
-        <p>Telefono de Responsable: {{p.telefono_responsable}}</p>
-      </div>
-    </div>
-    <div class="card col-md-3">
-      <div class="card-body">
-        <p>Usuario: {{p.user}}</p>
-        <p>Creación: </p>
-        <p>Actualización: </p>
-      </div>
-    </div>
-  </div>
+  </ng-container>
+  <!-- Fin Modal -->
+  <!-- Vista 2 -->
+  <ng-container *ngSwitchCase="'vista2'">
+    <h1>Vista 2</h1>
+
+    <!-- Contenido de la vista 2 -->
+  </ng-container>
+
+  <!-- Vista 3 -->
+  <ng-container *ngSwitchCase="'vista3'">
+    <h1>Vista 3</h1>
+    <!-- Contenido de la vista 3 -->
+  </ng-container>
+
+  <!-- Vista por defecto -->
+  <ng-container *ngSwitchDefault>
+    <h1>Vista por defecto</h1>
+    <!-- Contenido de la vista por defecto -->
+</ng-container>
+
+<button (click)="cambiarVista('vista1')">Vista 1</button>
+<button (click)="cambiarVista('vista2')">Vista 2</button>
+<button (click)="cambiarVista('vista3')">Vista 3</button>
+
+<!-- ... resto del contenido HTML del componente ... -->
+
+
 </div>
-

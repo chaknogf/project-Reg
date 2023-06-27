@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PacientesService } from 'src/app/services/pacientes.service';
 import { Ipaciente } from 'src/app/models/ipaciente';
-import { Router } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 
 
 @Component({
@@ -17,14 +17,11 @@ export class PacientesComponent{
   public paginaActual: number = 1; // Página actual
 
 
-  constructor(private pacientesService: PacientesService, private router: Router) { }
+  constructor(private pacientesService: PacientesService, private router: Router, private activateRoute: ActivatedRoute) { }
   reset: boolean = false;
 
   ngOnInit() {
     this.getPacientes();
-
-
-
   }
 
 
@@ -67,30 +64,6 @@ export class PacientesComponent{
     }
   }
 
-
-
-
-
-  calcularEdad(Nacimiento: Date): string {
-    const hoy = new Date();
-    const fechaNac = new Date(Nacimiento);
-    let años = hoy.getFullYear() - fechaNac.getFullYear();
-    let meses = hoy.getMonth() - fechaNac.getMonth();
-    let dias = hoy.getDate() - fechaNac.getDate();
-    if (meses < 0 || (meses === 0 && dias < 0)) {
-      años--;
-      meses += 12;
-      if (dias < 0) {
-        meses--;
-        dias += new Date(hoy.getFullYear(), hoy.getMonth(), 0).getDate();
-      }
-    } else if (dias < 0) {
-      meses--;
-      dias += new Date(hoy.getFullYear(), hoy.getMonth(), 0).getDate();
-    }
-
-    return `${años}a ${meses}m ${dias}d`;
-  }
 
   onPageChange(pageNumber: number) {
     this.paginaActual = pageNumber;

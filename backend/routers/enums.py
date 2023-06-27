@@ -95,9 +95,7 @@ class EstadoCivilEnum(int, Enum):
     unido = 2
     soltero = 3
     
-class LugarNacimiento(int, Enum):
-    Guatemala = 101
-    
+
 
 class nacionalidadEnum(int, Enum):
      

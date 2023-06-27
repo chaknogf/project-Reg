@@ -13,7 +13,7 @@ export interface Ipaciente {
   estado_civil: number;
   educacion: number;
   pueblo: number;
-  idioma: string;
+  idioma: number;
   ocupacion: string;
   direccion: string;
   telefono: number;
@@ -28,4 +28,13 @@ export interface Ipaciente {
   exp_madre: number;
   user: string;
   fechaDefuncion: string | Date;
+  municipio: string;
+  nation: string;
+  people: string;
+  ecivil: string;
+  academic: string;
+  parents: string;
+  lenguage: string;
+
 }
+

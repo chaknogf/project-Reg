@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import paciente, emergencia, consulta
+from routers import paciente, emergencia, consulta, municipio
 from models import pacientes, emergencias, consultas
 from fastapi.middleware.cors import CORSMiddleware
 from middlewares.error_hendler import ErrorHandler
@@ -37,6 +37,7 @@ def crear_tablas():
 app.include_router(paciente.router)
 app.include_router(emergencia.router)
 app.include_router(consulta.router)
+app.include_router(municipio.router)
 '''
 app.include_router(usuarios.router)
 

@@ -29,7 +29,7 @@ export class PacienteCrudComponent implements OnInit {
     estado_civil: 0,
     educacion: 0,
     pueblo: 0,
-    idioma: "Español",
+    idioma: 0,
     ocupacion: "",
     direccion: "",
     telefono: 0,
@@ -44,6 +44,13 @@ export class PacienteCrudComponent implements OnInit {
     exp_madre: 0,
     user: "admin",
     fechaDefuncion: "",  // Variable para la fecha de defunción
+    municipio: "",
+    nation: "",
+    people: "",
+    ecivil: "",
+    academic: "",
+    parents: "",
+    lenguage: ""
 
   };
 

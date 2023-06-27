@@ -24,7 +24,7 @@ Tpacientes = ('''
   `estado_civil` int DEFAULT NULL,
   `educacion` int DEFAULT NULL,
   `pueblo` int DEFAULT NULL,
-  `idioma` varchar(10) DEFAULT NULL,
+  `idioma` int DEFAULT NULL,
   `ocupacion` varchar(50) DEFAULT NULL,
   `direccion` varchar(100) DEFAULT NULL,
   `telefono` int DEFAULT NULL,
@@ -38,7 +38,7 @@ Tpacientes = ('''
   `estado` varchar(2) DEFAULT NULL,
   `exp_madre` int DEFAULT NULL,
   `user` varchar(50) DEFAULT NULL,
-  `fechaDefuncion` date DEFAULT NULL, 
+  `fechaDefuncion` varchar(10) DEFAULT NULL, 
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -79,7 +79,7 @@ class PacienteModel(Base):
     estado_civil = Column(Integer)
     educacion = Column(Integer)
     pueblo= Column(Integer)
-    idioma = Column(String(10))
+    idioma = Column(Integer)
     ocupacion = Column(String(50))
     direccion = Column(String(100))
     telefono = Column(Integer)
@@ -93,4 +93,5 @@ class PacienteModel(Base):
     estado = Column(String(2))
     exp_madre = Column(Integer)
     user = Column(String(50))
-    fechaDefuncion = Column(String)
+    fechaDefuncion = Column(String(10))
+   

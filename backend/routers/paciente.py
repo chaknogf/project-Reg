@@ -6,7 +6,8 @@ from sqlalchemy import func,select
 from sqlalchemy.exc import SQLAlchemyError
 from datetime import date, datetime
 from database import database
-import mysql.connector
+from routers.municipio import municipio
+from additionals.adicionales import Desc_Civil, Desc_discapacidad, Desc_educacion, Desc_idiomas, Desc_nacionalidad, Desc_orientacionSexual, Desc_parentesco, Desc_people
 from .enums import GeneroEnum, EstadoEnum
 from database.database import engine, Session, Base
 from models.pacientes import PacienteModel
@@ -52,7 +53,7 @@ class Paciente(BaseModel):
     estado_civil: int | None = None
     educacion: int | None = None
     pueblo: int | None = None
-    idioma: str | None = None
+    idioma: int | None = None
     ocupacion: str | None = None
     direccion: str | None = None
     telefono: int | None = None
@@ -69,7 +70,6 @@ class Paciente(BaseModel):
     fechaDefuncion: str | None = None
     
 
-        
 
     
 #Db.metadata.create_all(bind=engine)
@@ -84,7 +84,7 @@ async def obtener_ultimo_expediente():
 @router.get("/pacientes", tags=["Pacientes"])
 async def retornar_pacientes():
     try:
-        #ultimo_expediente()
+        
         Db = Session()
         result = Db.query(PacienteModel).all()
         print(f"** datetime: {now} CONSULTA - GET **")
@@ -99,6 +99,7 @@ async def retornar_pacientes():
 #Get conectado a SQL
 @router.get("/paciente/{exp}", tags=["Pacientes"])
 async def obtener_paciente(exp: int):
+    
     return buscar_paciente(exp)
 
 #Get conectado a SQL
@@ -189,9 +190,23 @@ def buscar_paciente(expe: int):
     try:
         Db = Session()
         result = Db.query(PacienteModel).filter(PacienteModel.expediente == expe).first()
+        adicional = municipio(result.lugar_nacimiento)
         if not result:
             return JSONResponse(status_code=404, content={"message": "No encontrado"})
-        return JSONResponse(status_code=200, content=jsonable_encoder(result))
+         # Crear el diccionario adicional con la información extra
+        adicional = {
+            "municipio": municipio(result.lugar_nacimiento),
+            "nation": Desc_nacionalidad(result.nacionalidad),
+            "people": Desc_people(result.pueblo),
+            "ecivil": Desc_Civil(result.estado_civil),
+            "academic": Desc_educacion(result.educacion),
+            "parents": Desc_parentesco(result.parentesco),
+            "lenguage": Desc_idiomas(result.idioma)
+                     
+            }
+         # Combinar los datos del paciente con la información adicional
+        response_data = {**jsonable_encoder(result), **adicional}
+        return JSONResponse(status_code=200, content=jsonable_encoder(response_data))
     except SQLAlchemyError as error:
         return {"message": f"Error al consultar paciente: {error}"}
     finally:

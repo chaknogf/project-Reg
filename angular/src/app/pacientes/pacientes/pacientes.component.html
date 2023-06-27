@@ -7,6 +7,7 @@
 
 <button type="button" class="btn btn-outline-primary" [routerLink]="['/paciente-crud']">Crear</button>
 
+
 <table class='table table-responsive-xxl' aria-labelledby="tableLabel" *ngIf="pacientes.length > 0">
   <thead>
     <tr>
@@ -28,6 +29,7 @@
     <tr *ngFor="let paciente of filteredPacientes"  >
       <td>
         <button class="btn btn-outline-dark" [routerLink]="['/detalleP/view', paciente.expediente]">ver</button>
+
       </td>
 
       <td>
@@ -40,9 +42,9 @@
       <td>{{ paciente.nombre }}</td>
       <td>{{ paciente.apellido }}</td>
       <td>{{ paciente.dpi }}</td>
-      <td>{{ paciente.nacimiento | date:'dd/MM/yyyy' }}</td>
+      <td>{{ paciente.nacimiento | date:'dd/MM/yyyy'  }}</td>
       <td>{{ paciente.sexo }}</td>
-      <td>{{ calcularEdad(paciente.nacimiento) }}</td>
+      <td>{{ paciente.nacimiento | edad }}</td>
       <td>{{ paciente.estado }}</td>
       <td>{{ paciente.id }}</td>
     </tr>
