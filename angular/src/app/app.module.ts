@@ -9,15 +9,15 @@ import { NumberToTextPipe } from './pacientes/pipesPacientes/number-to-text.pipe
 import { EdadPipe } from './pacientes/pipesPacientes/Edad.pipe';
 
 
-
-
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { PacientesComponent } from './pacientes/pacientes/pacientes.component';
 import { PacienteCrudComponent } from './pacientes/paciente-crud/paciente-crud.component';
 import { DetallePacienteComponent } from './pacientes/detallePaciente/detallePaciente.component';
-
+import { ConsultasComponent } from './consultas/consultas/consultas.component';
+import { UnisauComponent } from './UNISAU/unisau/unisau.component';
+import { ConstanciasComponent } from './constancias/constancias/constancias.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -25,6 +25,10 @@ const routes: Routes = [
   { path: 'paciente-crud', component: PacienteCrudComponent },
   { path: 'paciente/edit/:id', component: PacienteCrudComponent },
   { path: 'detalleP/view/:id', component: DetallePacienteComponent },
+  { path: 'consultas', component: ConsultasComponent },
+  { path: 'unisau', component: UnisauComponent },
+  { path: 'constancias', component: ConstanciasComponent },
+
 
 
 ]
@@ -37,7 +41,10 @@ const routes: Routes = [
     PacientesComponent,
     PacienteCrudComponent,
     PacientesComponent,
+    UnisauComponent,
+    ConstanciasComponent,
     HomeComponent,
+    ConsultasComponent,
     DetallePacienteComponent,
     FormatoDPIPipe,
     NumberToTextPipe,
@@ -56,6 +63,11 @@ const routes: Routes = [
       { path: 'paciente-crud', component: PacienteCrudComponent },
       { path: 'paciente/edit/:id', component: PacienteCrudComponent },
       { path: 'detalleP/view/:id', component: DetallePacienteComponent },
+      { path: 'consultas', component: ConsultasComponent },
+      { path: 'unisau', component: UnisauComponent },
+      { path: 'constancias', component: ConstanciasComponent },
+
+
 
     ])
   ],
